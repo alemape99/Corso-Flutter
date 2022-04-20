@@ -7,22 +7,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -32,15 +22,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -48,68 +29,316 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final _formKey = GlobalKey<FormState>();
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  final _controllerName = TextEditingController();
+  final _controllerEmail = TextEditingController();
+  final _controllerPhone = TextEditingController();
+  final _controllerPassword = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        centerTitle: true,
+        title: const Text('Login Page'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(60),
+              bottomRight: Radius.circular(60),
+              topLeft: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  icon: const Icon(Icons.close_outlined)),
+              Padding(
+                padding: const EdgeInsets.only(left: 35),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            'assets/sunset.jpg',
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: const [
+                      ListTile(
+                        leading: Icon(Icons.widgets_outlined),
+                        title: Text(
+                          'Menu Options',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.paid_outlined),
+                        title: Text(
+                          'Refunds',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.credit_card_outlined),
+                        title: Text(
+                          'Transactions',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.settings_outlined),
+                        title: Text(
+                          'Settings',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Column(
+                children: const [
+                  ListTile(
+                    leading: Icon(Icons.logout_outlined),
+                    title: Text(
+                      'Logout',
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(30),
+        child: ListView(
+          children: [
             const Text(
-              'You have pushed the button this many times:',
+              "Let's Get Started",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            const Text(
+              'Create an account to Q Allure to get all features',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 10,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 24),
+              child: Container(
+                height: 580,
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: [
+                      TextFormField(
+                        controller: _controllerName,
+                        cursorColor: Colors.blue,
+                        decoration: const InputDecoration(
+                          icon: Icon(
+                            Icons.person,
+                            color: Colors.blue,
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey),
+                          errorStyle: TextStyle(color: Colors.red),
+                          hintText: 'Name',
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(30),
+                              right: Radius.circular(30),
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 3,
+                            ),
+                          ),
+                        ),
+                        style: const TextStyle(color: Colors.blue),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      TextFormField(
+                        controller: _controllerEmail,
+                        cursorColor: Colors.blue,
+                        decoration: const InputDecoration(
+                          icon: Icon(
+                            Icons.email_outlined,
+                            color: Colors.blue,
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey),
+                          errorStyle: TextStyle(color: Colors.red),
+                          hintText: 'Email',
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(30),
+                              right: Radius.circular(30),
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 3,
+                            ),
+                          ),
+                        ),
+                        style: const TextStyle(color: Colors.blue),
+                        validator: (value){
+                          if(value ==null || value.isEmpty){
+                            return 'Inserisci una email';
+                          }
+                          if(!value.contains('@') || !value.contains('.')){
+                            return 'Inserisci una mail valida';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      TextFormField(
+                        controller: _controllerPhone,
+                        cursorColor: Colors.blue,
+                        decoration: const InputDecoration(
+                          icon: Icon(
+                            Icons.phone_outlined,
+                            color: Colors.blue,
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey),
+                          errorStyle: TextStyle(color: Colors.red),
+                          hintText: 'Phone',
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(30),
+                              right: Radius.circular(30),
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 3,
+                            ),
+                          ),
+                        ),
+                        style: const TextStyle(color: Colors.blue),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      TextFormField(
+                        cursorColor: Colors.blue,
+                        decoration: const InputDecoration(
+                          icon: Icon(
+                            Icons.lock_outlined,
+                            color: Colors.blue,
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey),
+                          errorStyle: TextStyle(color: Colors.red),
+                          hintText: 'Password',
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(30),
+                              right: Radius.circular(30),
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 3,
+                            ),
+                          ),
+                        ),
+                        style: const TextStyle(color: Colors.blue),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      TextFormField(
+                        cursorColor: Colors.blue,
+                        decoration: const InputDecoration(
+                          icon: Icon(
+                            Icons.lock_outlined,
+                            color: Colors.blue,
+                          ),
+                          hintStyle: TextStyle(color: Colors.grey),
+                          errorStyle: TextStyle(color: Colors.red),
+                          hintText: 'Confirm Password',
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(30),
+                              right: Radius.circular(30),
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 3,
+                            ),
+                          ),
+                        ),
+                        style: const TextStyle(color: Colors.blue),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 80),
+                        child: Align(
+                          child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                MaterialStateProperty.all(Colors.blue),
+                              ),
+                              onPressed: () => showDialog(
+                                context: context,
+                                builder: (context) =>  AlertDialog(
+                                  content: Text(
+                                      "Questi sono i tuoi dati:\n ${_controllerName.text} \n ${_controllerEmail.text} \n ${_controllerPhone.text}"
+                                  ),
+                                ),
+                              ),
+                              child: const Text('Create')),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: const TextSpan(
+                            text: 'Already have an account?',
+                            style: TextStyle(fontSize: 13, color: Colors.black),
+                            children: [
+                              TextSpan(
+                                  text: ' Login Here',
+                                  style: TextStyle(color: Colors.blue)
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
