@@ -316,7 +316,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         child: RichText(
                           textAlign: TextAlign.center,
                           text: const TextSpan(
