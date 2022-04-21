@@ -4,8 +4,8 @@ import 'package:prima_app/components/titolo.dart';
 import 'package:prima_app/models/interessi.dart';
 
 class Categorie extends StatelessWidget {
-
-  const Categorie({Key? key}) : super(key: key);
+  final double height;
+  const Categorie({required this.height, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class Categorie extends StatelessWidget {
             child: Titolo(text: 'Category')
         ),
         SizedBox(
-          height: 100,
+          height: height,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: Interessi.values
