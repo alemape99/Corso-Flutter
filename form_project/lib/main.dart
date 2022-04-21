@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
   runApp(const MyApp());
@@ -147,8 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
               'Create an account to Q Allure to get all features',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.grey,
-                fontSize: 10,
+                color: Colors.black54,
+                fontSize: 11,
               ),
             ),
             Padding(
@@ -158,6 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Form(
                   key: _formKey,
                   child: ListView(
+                    scrollDirection: Axis.vertical,
                     children: [
                       TextFormField(
                         controller: _controllerName,
