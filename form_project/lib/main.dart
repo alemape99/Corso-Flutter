@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _controllerEmail = TextEditingController();
   final _controllerPhone = TextEditingController();
   final _controllerPassword = TextEditingController();
+  final _controllerConfirmPassword = TextEditingController();
 
 
   @override
@@ -248,6 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 40,
                       ),
                       TextFormField(
+                        controller: _controllerPassword,
                         cursorColor: Colors.blue,
                         decoration: const InputDecoration(
                           icon: Icon(
@@ -274,6 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 40,
                       ),
                       TextFormField(
+                        controller: _controllerConfirmPassword,
                         cursorColor: Colors.blue,
                         decoration: const InputDecoration(
                           icon: Icon(
@@ -308,7 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 context: context,
                                 builder: (context) =>  AlertDialog(
                                   content: Text(
-                                      "Questi sono i tuoi dati:\n ${_controllerName.text} \n ${_controllerEmail.text} \n ${_controllerPhone.text}"
+                                      "Questi sono i tuoi dati:\n \n Nome: ${_controllerName.text} \n Email: ${_controllerEmail.text} \n Numero Telefono: ${_controllerPhone.text} \n Password: ${_controllerPassword.text} \n Conferma Password: ${_controllerConfirmPassword.text}"
                                   ),
                                 ),
                               ),
