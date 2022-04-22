@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
 
 class Ricerca extends StatelessWidget {
-  const Ricerca({Key? key}) : super(key: key);
+  final bool amIOnHomepage;
+  final Function(String)? callback;
+
+  const Ricerca({this.amIOnHomepage = false, this.callback, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: 16),
             child: TextField(
-              decoration: InputDecoration(
+              onTap: amIOnHomepage
+                  ? () {
+                FocusScope.of(context).unfocus();
+                Navigator.of(context).pushNamed('/search');
+              } : null,
+              onChanged: callback,
+              readOnly: amIOnHomepage,
+              autofocus: !amIOnHomepage,
+              decoration: const InputDecoration(
                 hintText: 'Search',
                 hintStyle: TextStyle(color: Colors.grey),
                 suffixIcon: Icon(Icons.search),
@@ -22,12 +33,9 @@ class Ricerca extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(left: 16),
-          padding: const EdgeInsets.all(13),
-          color: Colors.black12,
-          child: const Icon(Icons.filter_list_outlined),
-        ),
+        IconButton(
+            onPressed: () => print('Filtro'),
+            icon: Icon(Icons.filter_list_outlined)),
       ],
     );
   }

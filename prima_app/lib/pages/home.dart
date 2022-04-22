@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
         child: ListView(
           children: const [
             Categorie(height: 100),
-            Ricerca(),
+            Ricerca(amIOnHomepage: true,),
             Titolo(text: 'Popular Place'),
             PopularPlace(height: 150),
             Titolo(

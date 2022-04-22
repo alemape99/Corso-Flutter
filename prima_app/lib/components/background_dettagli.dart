@@ -8,8 +8,7 @@ class BackgroundDettagli extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
-      width: double.infinity,
+      height: 400,
       decoration:  BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,

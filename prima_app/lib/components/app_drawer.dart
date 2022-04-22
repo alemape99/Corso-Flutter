@@ -48,7 +48,7 @@ class AppDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.travel_explore),
               title: const Text('Global Search'),
-              onTap: () => Navigator.of(context).popAndPushNamed('/mete'),
+              onTap: () => Navigator.of(context).popAndPushNamed('/search'),
             ),
             const ListTile(
               leading: Icon(Icons.logout),
