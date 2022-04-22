@@ -53,16 +53,24 @@ class InfoCitta extends StatelessWidget {
                       ),),
                   ],
                 ),
-                Icon(
-                  Icons.star,
-                  color: Colors.yellow.shade900,
+                Row(
+                  children:  [
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow.shade900,
+                    ),
+                    Text(meta.rating.toString()),
+                  ],
                 ),
-                Text(meta.rating.toString()),
-                Icon(
-                  Icons.schedule_outlined,
-                  color: Colors.purple.shade800,
-                ),
-                const Text('12:00')
+                Row(
+                  children: [
+                    Icon(
+                      Icons.schedule_outlined,
+                      color: Colors.purple.shade800,
+                    ),
+                    const Text('12:00')
+                  ],
+                )
               ],
             ),
           ],
