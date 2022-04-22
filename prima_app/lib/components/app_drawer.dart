@@ -21,7 +21,10 @@ class AppDrawer extends StatelessWidget {
                 children: const [
                   CircleAvatar(
                     radius: 45,
-                    child: Text('AM'),
+                    backgroundImage: AssetImage(
+
+                        'assets/logo.jpeg'
+                    ),
                   ),
                   Text('Benvenuto',  style: TextStyle(
                     fontSize: 18,

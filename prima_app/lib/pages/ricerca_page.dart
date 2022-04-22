@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prima_app/components/liste_precise_paesi.dart';
 import 'package:prima_app/components/place_card.dart';
 import 'package:prima_app/components/ricerca.dart';
 import 'package:prima_app/models/meta_turistica.dart';
@@ -37,8 +38,15 @@ class _RicercaPageState extends State<RicercaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black45,
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
-        title: const Text('Ricerca'),
+        title: const Text('Ricerca', style: TextStyle(
+          color: Colors.blue,
+        ),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -53,7 +61,7 @@ class _RicercaPageState extends State<RicercaPage> {
                 itemBuilder: (context, index) {
                   return Container(
                     height: 100,
-                    child: PlaceCard(_risultatiRicerca[index]),
+                    child: ListePrecisePaesi(_risultatiRicerca[index]),
                   );
                 }
               ),

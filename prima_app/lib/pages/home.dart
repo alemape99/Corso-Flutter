@@ -33,8 +33,15 @@ class Home extends StatelessWidget {
           ],
         ),
         actions: const [
-          CircleAvatar(
-            child: Text('AM'),
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage(
+
+                'assets/logo.jpeg'
+              ),
+            ),
           )
         ],
       ),
