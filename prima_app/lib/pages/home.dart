@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:prima_app/components/app_drawer.dart';
 import 'package:prima_app/components/categorie.dart';
 import 'package:prima_app/components/popular_place.dart';
 import 'package:prima_app/components/recomended_place.dart';
 import 'package:prima_app/components/ricerca.dart';
 import 'package:prima_app/components/titolo.dart';
-
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -34,22 +34,25 @@ class Home extends StatelessWidget {
         ),
         actions: const [
           CircleAvatar(
-            backgroundColor: Colors.yellow,
             child: Text('AM'),
           )
         ],
       ),
-      drawer: const Drawer(),
+      drawer: const AppDrawer(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
           children: const [
-             Categorie(height: 100),
-             Ricerca(),
-             Titolo(text: 'Popular Place'),
-             PopularPlace(height: 150),
-             Titolo(text: 'Raccomended Place',),
-             RecomendedPlace(),
+            Categorie(height: 100),
+            Ricerca(),
+            Titolo(text: 'Popular Place'),
+            PopularPlace(height: 150),
+            Titolo(
+              text: 'Raccomended Place',
+            ),
+            RacomandedPlace(
+              height: 150,
+            ),
           ],
         ),
       ),
