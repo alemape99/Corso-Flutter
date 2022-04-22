@@ -37,8 +37,8 @@ class MetaTuristica {
           available: true,
           raccomanded: true,
           imageUrl: 'https://citynews-romatoday.stgy.ovh/~media/horizontal-mid/602411987578/colosseo-roma-3.jpg',
-          description: """Roma (AFI: /ˈroma/[6], pronuncia[?·info]) è la capitale d'Italia. È altresì capoluogo dell'omonima città metropolitana e della regione Lazio. Il comune di Roma è dotato di un ordinamento amministrativo speciale, denominato Roma Capitale e disciplinato da una legge dello Stato.[7]
-Contando 2 759 670 abitanti[3][8], è il comune più popoloso d'Italia e il terzo dell'Unione europea dopo Berlino e Madrid[3]. Mentre con 1287,36 km² è il comune più esteso d'Italia e dell'Unione europea, nonché la quinta città più estesa d'Europa dopo Mosca, Istanbul, Londra e San Pietroburgo. È inoltre il comune europeo con la maggiore superficie di aree verdi[9].""",
+          description: """Roma è la capitale d'Italia. È altresì capoluogo dell'omonima città metropolitana e della regione Lazio. Il comune di Roma è dotato di un ordinamento amministrativo speciale, denominato Roma Capitale e disciplinato da una legge dello Stato.
+Contando 2 759 670 abitanti, è il comune più popoloso d'Italia e il terzo dell'Unione europea dopo Berlino e Madrid. Mentre con 1287,36 km² è il comune più esteso d'Italia e dell'Unione europea, nonché la quinta città più estesa d'Europa dopo Mosca, Istanbul, Londra e San Pietroburgo. È inoltre il comune europeo con la maggiore superficie di aree verdi.""",
           interessi: [
             Interessi.spa
           ]
