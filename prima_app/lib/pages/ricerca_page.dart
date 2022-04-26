@@ -13,51 +13,58 @@ class RicercaPage extends StatefulWidget {
 
 class _RicercaPageState extends State<RicercaPage> {
   late List<MetaTuristica> _risultatiRicerca;
-
+  String? _paroladiRicerca;
   late int _minRating;
   late int _maxRating;
-  String?  _country;
+  String? _country;
+  bool? _available;
 
   @override
   void initState() {
     super.initState();
+
     _minRating = 1;
     _maxRating = 5;
-
     _risultatiRicerca = MetaTuristica.listaMete;
   }
-  void _additionalFilters({
+
+  void _setadditionalFilters({
     int minRating = 1,
     int maxRating = 5,
     String? country,
+    bool? available,
+  }) {
+    _minRating = minRating;
+    _maxRating = maxRating;
+    _country = country;
+    _available = available;
 
-  }){
-    setState(() {
-      _minRating =minRating;
-      _maxRating = maxRating;
-      _country = country;
-
-
-      _risultatiRicerca = _risultatiRicerca.where((risultato){
-        return
-          risultato.rating >= minRating
-          && risultato.rating <= maxRating
-          && (country == null || risultato.country == country)
-        ;
-      }) .toList();
-    });
+    _filtraMete(_paroladiRicerca ?? '');
   }
 
-  _filtraMete(String parolaDiRicerca){
-    if(parolaDiRicerca.isEmpty){
+  bool _additionalFiltersfor(MetaTuristica meta) {
+    return meta.rating >= _minRating &&
+        meta.rating <= _maxRating &&
+        (_country == null || meta.country == _country) &&
+        (_available == null ||
+            _available == false ||
+            meta.available == _available);
+  }
+
+  void _filtraMete(String parolaDiRicerca) {
+    _paroladiRicerca = parolaDiRicerca;
+    if (parolaDiRicerca.isEmpty) {
       setState(() {
-        _risultatiRicerca = MetaTuristica.listaMete;
+        _risultatiRicerca = MetaTuristica.listaMete
+            .where((meta) => _additionalFiltersfor(meta))
+            .toList();
       });
-    }
-    else{
+    } else {
       setState(() {
-        _risultatiRicerca = MetaTuristica.listaMete.where((meta) =>
-            meta.city.toLowerCase().contains(parolaDiRicerca.toLowerCase())).toList();
+        _risultatiRicerca = MetaTuristica.listaMete
+            .where((meta) =>
+                meta.city.toLowerCase().contains(parolaDiRicerca.toLowerCase()))
+            .toList();
       });
     }
   }
@@ -68,7 +75,10 @@ class _RicercaPageState extends State<RicercaPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(Icons.arrow_back, color: Colors.blue,),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.blue,
+          ),
         ),
         iconTheme: const IconThemeData(
           color: Colors.black45,
@@ -76,36 +86,52 @@ class _RicercaPageState extends State<RicercaPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: const Text('Ricerca', style: TextStyle(
-          color: Colors.blue,
-        ),),
-        actions: const [SizedBox(width: 0,)],
+        title: const Text(
+          'Ricerca',
+          style: TextStyle(
+            color: Colors.blue,
+          ),
+        ),
+        actions: const [
+          SizedBox(
+            width: 0,
+          )
+        ],
       ),
       endDrawer: FilterDrawer(
-        selectedRating: RangeValues(_minRating.toDouble(), _maxRating.toDouble()),
-        setFilters: _additionalFilters,
+        selectedRating:
+            RangeValues(_minRating.toDouble(), _maxRating.toDouble()),
+        setFilters: _setadditionalFilters,
         selectedcountry: _country,
+        available: _available ?? false,
       ),
       endDrawerEnableOpenDragGesture: false,
-
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Ricerca(amIOnHomepage: false, callback: _filtraMete,),
-            _risultatiRicerca.length == 0
-            ? const Text('Nessun risultato per la ricerca'):
-            Expanded(
-              child: ListView.builder(
-                itemCount: _risultatiRicerca.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 100,
-                    child: ListePrecisePaesi(_risultatiRicerca[index]),
-                  );
-                }
-              ),
+            Ricerca(
+              amIOnHomepage: false,
+              callback: _filtraMete,
             ),
+            if (_risultatiRicerca.isNotEmpty)
+              Text('Risultati trovati: ${_risultatiRicerca.length}'),
+            _risultatiRicerca.isEmpty
+                ? const Text('Nessun risultato per la ricerca')
+                : Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: ListView.builder(
+                          itemCount: _risultatiRicerca.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: 100,
+                              child:
+                                  ListePrecisePaesi(_risultatiRicerca[index]),
+                            );
+                          }),
+                    ),
+                  ),
           ],
         ),
       ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:prima_app/components/titolo.dart';
 import 'package:prima_app/models/meta_turistica.dart';
 
 class FilterDrawer extends StatefulWidget {
   final RangeValues selectedRating;
   final String? selectedcountry;
-  final Function({int minRating, int maxRating, String? country}) setFilters;
+  final Function({int minRating, int maxRating, String? country, bool? available}) setFilters;
+  final bool available;
 
   const FilterDrawer(
-      {required this.selectedRating, required this.setFilters, this.selectedcountry, Key? key})
+      {required this.selectedRating, required this.setFilters, this.selectedcountry, this.available = false, Key? key})
       : super(key: key);
 
   @override
@@ -19,6 +19,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
   late RangeValues _selectedRating;
   late List<String> _countryList;
   String? _selectedCountry;
+  late bool? _avaliable;
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
     _countryList =
         MetaTuristica.listaMete.map((meta) => meta.country).toSet().toList();
     _countryList.sort();
+    _avaliable = widget.available;
   }
 
   @override
@@ -36,18 +38,46 @@ class _FilterDrawerState extends State<FilterDrawer> {
       child: SafeArea(
         child: Column(
           children: [
-            const Titolo(text: 'Filtri'),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(Icons.clear_outlined)),
+                const SizedBox(
+                  width: 80,
+                ),
+                const Text('Filtri', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
+              ],
+            ),
+
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.only(right: 16, left: 16, top: 16),
                 child: Form(
                   child: ListView(
                     children: [
-                      Text(
-                          'Rating (Attualmente selezionati: da ${_selectedRating.start.toString().substring(0, 1)}, a ${_selectedRating.end.toString().substring(0, 1)}) '),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: const [
+                              Text(
+                                  'Rating', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)
+                              ),
+                              Icon(Icons.star, color: Colors.amber,)
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                                '(Attualmente selezionati: da ${_selectedRating.start.toString().substring(0, 1)} a ${_selectedRating.end.toString().substring(0, 1)}) '),
+                          ),
+                        ],
+                      ),
                       Row(
                         children: [
                           const Text('1'),
+                          const Icon(Icons.star, color: Colors.amber,size: 12),
                           Expanded(
                             child: RangeSlider(
                               min: 1,
@@ -69,7 +99,24 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             ),
                           ),
                           const Text('5'),
+                          const Icon(Icons.star, color: Colors.amber,size: 12),
                         ],
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child:  Row(
+                          children: const [
+                            Text('Country Selection',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600, 
+                                    fontSize: 20),
+                            ),
+                            Icon(Icons.flag_outlined, color: Colors.grey)
+                          ],
+                        ),
                       ),
                       FormField(
                         builder: (context) {
@@ -103,7 +150,28 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             ),
                           );
                         },
-
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        children: const [
+                          Text('Availability',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20),
+                          ),
+                          Icon(Icons.done_outlined)
+                        ],
+                      ),
+                      SwitchListTile(
+                        title: const Text('Available'),
+                          value: _avaliable ?? false,
+                          onChanged: (toogle){
+                          setState(() {
+                            _avaliable = toogle;
+                          });
+                          }
                       ),
                     ],
                   ),
@@ -116,7 +184,13 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                      onPressed: () => print('reset'),
+                      onPressed: () {
+                        setState(() {
+                          _avaliable = null;
+                          _selectedCountry = null;
+                          _selectedRating = const RangeValues(1,5);
+                        });
+                      },
                       child: const Padding(
                         padding:  EdgeInsets.all(8.0),
                         child:  Text('Reset'),
@@ -127,6 +201,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             minRating: _selectedRating.start.toInt(),
                             maxRating: _selectedRating.end.toInt(),
                             country: _selectedCountry,
+                            available: _avaliable == false ? null : _avaliable,
                         );
                         Navigator.of(context).pop();
                       },
@@ -134,7 +209,6 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         padding: EdgeInsets.all(8.0),
                         child: Text('Applica'),
                       )),
-
                 ],
               ),
             )
