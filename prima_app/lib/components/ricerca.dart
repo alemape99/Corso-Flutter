@@ -34,7 +34,11 @@ class Ricerca extends StatelessWidget {
           ),
         ),
         IconButton(
-            onPressed: () => print('Filtro'),
+            onPressed: () {
+              if (Scaffold.of(context).hasEndDrawer){
+                Scaffold.of(context).openEndDrawer();
+              }
+            },
             icon: Icon(Icons.filter_list_outlined)),
       ],
     );

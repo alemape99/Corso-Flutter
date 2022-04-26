@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:prima_app/components/filter_drawer.dart';
 import 'package:prima_app/components/liste_precise_paesi.dart';
-import 'package:prima_app/components/place_card.dart';
 import 'package:prima_app/components/ricerca.dart';
 import 'package:prima_app/models/meta_turistica.dart';
 
@@ -14,10 +14,38 @@ class RicercaPage extends StatefulWidget {
 class _RicercaPageState extends State<RicercaPage> {
   late List<MetaTuristica> _risultatiRicerca;
 
+  late int _minRating;
+  late int _maxRating;
+  String?  _country;
+
   @override
   void initState() {
     super.initState();
+    _minRating = 1;
+    _maxRating = 5;
+
     _risultatiRicerca = MetaTuristica.listaMete;
+  }
+  void _additionalFilters({
+    int minRating = 1,
+    int maxRating = 5,
+    String? country,
+
+  }){
+    setState(() {
+      _minRating =minRating;
+      _maxRating = maxRating;
+      _country = country;
+
+
+      _risultatiRicerca = _risultatiRicerca.where((risultato){
+        return
+          risultato.rating >= minRating
+          && risultato.rating <= maxRating
+          && (country == null || risultato.country == country)
+        ;
+      }) .toList();
+    });
   }
 
   _filtraMete(String parolaDiRicerca){
@@ -38,6 +66,7 @@ class _RicercaPageState extends State<RicercaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         iconTheme: const IconThemeData(
           color: Colors.black45,
         ),
@@ -47,14 +76,22 @@ class _RicercaPageState extends State<RicercaPage> {
         title: const Text('Ricerca', style: TextStyle(
           color: Colors.blue,
         ),),
+        actions: const [SizedBox(width: 0,)],
       ),
+      endDrawer: FilterDrawer(
+        selectedRating: RangeValues(_minRating.toDouble(), _maxRating.toDouble()),
+        setFilters: _additionalFilters,
+        selectedcountry: _country,
+      ),
+      endDrawerEnableOpenDragGesture: false,
+
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Ricerca(amIOnHomepage: false, callback: _filtraMete,),
             _risultatiRicerca.length == 0
-            ? Text('Nessun risultato per la ricerca'):
+            ? const Text('Nessun risultato per la ricerca'):
             Expanded(
               child: ListView.builder(
                 itemCount: _risultatiRicerca.length,
