@@ -14,19 +14,37 @@ class Categorie extends StatelessWidget {
       children: [
         const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Titolo(text: 'Category')
-        ),
+            child: Titolo(text: 'Category')),
         SizedBox(
           height: height,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: Interessi.values
-                .map((interesse) => CategoryCard(
-                icona: interesse.icon,
-                text: interesse.name,
-                color: interesse.colore))
-                .toList(),
-          ),
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: Interessi.values.length,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return Row(
+                    children: [
+                      const CategoryCard(
+                        color: Colors.red,
+                        icona: Icons.spa,
+                        text: 'all',
+                      ),
+                      CategoryCard(
+                        color: Interessi.values[index].colore,
+                        icona: Interessi.values[index].icon,
+                        text: Interessi.values[index].name,
+                        marginRight: index != (Interessi.values.length - 1),
+                      )
+                    ],
+                  );
+                }
+                return CategoryCard(
+                  color: Interessi.values[index].colore,
+                  icona: Interessi.values[index].icon,
+                  text: Interessi.values[index].name,
+                  marginRight: index != (Interessi.values.length - 1),
+                );
+              }),
         ),
       ],
     );

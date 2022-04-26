@@ -4,13 +4,15 @@ class CategoryCard extends StatelessWidget {
   final IconData icona;
   final String text;
   final Color color;
+  final bool marginRight;
 
-  const CategoryCard({required this.icona, required this.text, required this.color, Key? key}) : super(key: key);
+  const CategoryCard({required this.icona, required this.text, required this.color, this.marginRight = true,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 8),
+      padding: const EdgeInsets.only(right: 8),
+      margin: marginRight ? const EdgeInsets.only(right: 8) : null,
       decoration: BoxDecoration(
         borderRadius: const
         BorderRadius.all(Radius.circular(16)),

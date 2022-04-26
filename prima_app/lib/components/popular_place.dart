@@ -21,7 +21,7 @@ class PopularPlace extends StatelessWidget {
                     MetaTuristica.listaMete[index]
                 );
               }
-              return const SizedBox(width: 0,);
+              return const SizedBox(width: 0);
             }),
       ),
     );

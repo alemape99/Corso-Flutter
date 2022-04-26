@@ -66,7 +66,10 @@ class _RicercaPageState extends State<RicercaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
+        leading: IconButton(
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.arrow_back, color: Colors.blue,),
+        ),
         iconTheme: const IconThemeData(
           color: Colors.black45,
         ),

@@ -117,7 +117,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 children: [
                   ElevatedButton(
                       onPressed: () => print('reset'),
-                      child: const Text('Reset')),
+                      child: const Padding(
+                        padding:  EdgeInsets.all(8.0),
+                        child:  Text('Reset'),
+                      )),
                   ElevatedButton(
                       onPressed: () {
                         widget.setFilters(
@@ -127,7 +130,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
                         );
                         Navigator.of(context).pop();
                       },
-                      child: const  Text('Applica')),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Applica'),
+                      )),
 
                 ],
               ),

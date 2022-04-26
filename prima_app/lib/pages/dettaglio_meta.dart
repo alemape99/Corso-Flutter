@@ -85,7 +85,7 @@ class DettaglioMeta extends StatelessWidget {
                           height: 100,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: const  [
+                            children: const [
                               FotoDettaglio(),
                               FotoDettaglio(),
                               FotoDettaglio(),
@@ -101,11 +101,10 @@ class DettaglioMeta extends StatelessWidget {
                           child: Container(
                             height: 100,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              image: const DecorationImage(
-                                image: const NetworkImage('https://www.venezia.net/wp-content/uploads/2012/09/mappa.jpg')
-                              )
-                            ),
+                                borderRadius: BorderRadius.circular(12),
+                                image: const DecorationImage(
+                                    image: NetworkImage(
+                                        'https://www.venezia.net/wp-content/uploads/2012/09/mappa.jpg'))),
                           ),
                         ),
                         Padding(
@@ -115,20 +114,23 @@ class DettaglioMeta extends StatelessWidget {
                             children: [
                               Column(
                                 children: [
-                                  Text("\$ ${meta.minPrice}",
+                                  Text(
+                                    "\$ ${meta.minPrice}",
                                     style: const TextStyle(
                                         fontSize: 25,
-                                        fontWeight: FontWeight.bold
-                                    ),
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  Text('Minimum Price')
+                                  const Text('Minimum Price')
                                 ],
                               ),
                               ElevatedButton(
-                                  onPressed: () => print('Compra'),
-                                  child: const Text(
-                                    'Book Now'
-                                  ),),
+                                onPressed: () => print('Compra'),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 32),
+                                  child: Text('Book Now'),
+                                ),
+                              ),
                             ],
                           ),
                         )

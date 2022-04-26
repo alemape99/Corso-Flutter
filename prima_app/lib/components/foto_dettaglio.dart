@@ -6,7 +6,7 @@ class FotoDettaglio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 10),
+      margin: const EdgeInsets.only(right: 10),
       width: 100,
       height: 100,
       decoration: BoxDecoration(

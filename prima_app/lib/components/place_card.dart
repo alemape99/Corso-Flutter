@@ -57,6 +57,9 @@ class PlaceCard extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 4,
+              )
             ],
           ),
         ),

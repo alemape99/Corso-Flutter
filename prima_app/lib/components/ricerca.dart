@@ -39,7 +39,7 @@ class Ricerca extends StatelessWidget {
                 Scaffold.of(context).openEndDrawer();
               }
             },
-            icon: Icon(Icons.filter_list_outlined)),
+            icon: const Icon(Icons.filter_list_outlined, color: Colors.blue)),
       ],
     );
   }

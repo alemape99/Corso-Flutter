@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:prima_app/components/titolo.dart';
 import 'package:prima_app/models/meta_turistica.dart';
 import 'package:prima_app/pages/dettaglio_meta.dart';
 
@@ -49,7 +48,7 @@ class ListePrecisePaesi extends StatelessWidget {
                               fontWeight: FontWeight.bold, fontSize: 20
                             ),),
                             const Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
+                              padding: EdgeInsets.only(top: 8.0),
                               child: Text('Another journey chamber way yet'),
                             ),
                             Padding(
@@ -60,7 +59,7 @@ class ListePrecisePaesi extends StatelessWidget {
                                   Text(meta.rating.toString()),
                                   Row(
                                     children: [
-                                      Icon(Icons.place_outlined, color: Colors.blue,),
+                                      const Icon(Icons.place_outlined, color: Colors.blue,),
                                       Text(meta.country)
                                     ],
                                   ),

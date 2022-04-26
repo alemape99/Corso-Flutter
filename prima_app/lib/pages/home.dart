@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.black45,
+          color: Colors.blue,
         ),
         backgroundColor: Colors.white,
         elevation: 0,
