@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:prima_app/components/filter_drawer.dart';
 import 'package:prima_app/components/liste_precise_paesi.dart';
 import 'package:prima_app/components/ricerca.dart';
@@ -18,6 +19,8 @@ class _RicercaPageState extends State<RicercaPage> {
   late int _maxRating;
   String? _country;
   bool? _available;
+  late final GlobalKey<ScaffoldState> _scaffoldKey;
+
 
   @override
   void initState() {
@@ -26,6 +29,17 @@ class _RicercaPageState extends State<RicercaPage> {
     _minRating = 1;
     _maxRating = 5;
     _risultatiRicerca = MetaTuristica.listaMete;
+    _scaffoldKey = GlobalKey();
+
+    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+      final modalArgs = ModalRoute.of(context)?.settings.arguments ?? [];
+      if(modalArgs is List
+      && modalArgs.isNotEmpty
+      && modalArgs[0] is Map<String, bool>
+      && modalArgs[0] ['openDrawer'] == true){
+        _scaffoldKey.currentState?.openEndDrawer();
+      }
+    });
   }
 
   void _setadditionalFilters({
@@ -72,6 +86,7 @@ class _RicercaPageState extends State<RicercaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
