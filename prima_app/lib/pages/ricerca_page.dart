@@ -32,11 +32,10 @@ class _RicercaPageState extends State<RicercaPage> {
     _scaffoldKey = GlobalKey();
 
     SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
-      final modalArgs = ModalRoute.of(context)?.settings.arguments ?? [];
-      if(modalArgs is List
-      && modalArgs.isNotEmpty
-      && modalArgs[0] is Map<String, bool>
-      && modalArgs[0] ['openDrawer'] == true){
+      final modalArgs = ModalRoute.of(context)?.settings.arguments ?? {};
+
+      if( modalArgs is Map <String, bool>
+      && modalArgs ['openDrawer']== true){
         _scaffoldKey.currentState?.openEndDrawer();
       }
     });

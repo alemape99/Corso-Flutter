@@ -38,7 +38,7 @@ class Ricerca extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   if(amIOnHomepage){
-                    Navigator.of(context).pushNamed('/search', arguments: [{'openDrawer' : true}]);
+                    Navigator.of(context).pushNamed('/search', arguments: {'openDrawer' : true});
                   }
                   else {
                     if (Scaffold.of(context).hasEndDrawer){
