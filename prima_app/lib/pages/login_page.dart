@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:prima_app/components/form_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class LoginPage extends StatelessWidget {
   final _formkey = GlobalKey<FormState>();
+
   LoginPage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +57,16 @@ class LoginPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 64),
                           child: ElevatedButton(
-                              onPressed: ()  {
-                                if(_formkey.currentState?.validate() ?? false)
-                                {Navigator.of(context).popAndPushNamed('/home');
+                              onPressed: ()  async {
+                                if(_formkey.currentState?.validate() ?? false) {
+                                  SharedPreferences sp = await SharedPreferences.getInstance();
+                                  sp.setBool('loggato', true );
+                                  Navigator.of(context).popAndPushNamed('/home');
                                 }
                                 },
-                              child: const Text('Log In')),
-                        )
+                              child: const Text('Log In')
+                          ),
+                        ),
                       ],
                     ),
                 ),
