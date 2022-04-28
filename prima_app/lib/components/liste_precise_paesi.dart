@@ -36,39 +36,45 @@ class ListePrecisePaesi extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.only(left: 40),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 8, right:8),
+                    padding: const EdgeInsets.only(top: 8, right: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(meta.city, style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20
-                            ),),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 8.0),
-                              child: Text('Another journey chamber way yet'),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Row(
+                      children: [
+                        Text(
+                          meta.city,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 8.0),
+                          child: Text('Another journey chamber way yet'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.star_outlined,
+                                color: Colors.yellow.shade900,
+                              ),
+                              Text(meta.rating.toString()),
+                              Row(
                                 children: [
-                                  Icon(Icons.star_outlined, color: Colors.yellow.shade900,),
-                                  Text(meta.rating.toString()),
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.place_outlined, color: Colors.blue,),
-                                      Text(meta.country)
-                                    ],
+                                  const Icon(
+                                    Icons.place_outlined,
+                                    color: Colors.blue,
                                   ),
+                                  Text(meta.country)
                                 ],
                               ),
-                            ),
-
-                          ],
-                      ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

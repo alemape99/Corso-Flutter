@@ -34,7 +34,7 @@ class DettaglioMeta extends StatelessWidget {
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(
                         Icons.arrow_back_outlined,
-                        color: Colors.black45,
+                        color: Colors.blue,
                       )),
                 ),
               ),
@@ -81,13 +81,12 @@ class DettaglioMeta extends StatelessWidget {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: const [
-                              FotoDettaglio(),
-                              FotoDettaglio(),
-                              FotoDettaglio(),
-                              FotoDettaglio(),
-                              FotoDettaglio(),
-                              FotoDettaglio(),
-                              FotoDettaglio(),
+                              FotoDettaglio(image: 'https://www.travel365.it/foto/venezia-italia-barche-citta-urbano.jpg'),
+                              FotoDettaglio(image: 'https://static.myluxury.it/myluxury/fotogallery/780X0/87221/la-citta-piu-bella-del-mondo-venezia.jpg',),
+                              FotoDettaglio(image: 'https://www.immobiliare.it/news/app/uploads/2010/06/vivere-citta.jpg',),
+                              FotoDettaglio(image: 'https://images.lonelyplanetitalia.it/uploads/astana?q=80&p=slider&s=2f5f911584e91b64cd36b243f4615814',),
+                              FotoDettaglio(image: 'https://www.milanocittastato.it/wp-content/uploads/2020/11/image.jpg',),
+                              FotoDettaglio(image: 'https://www.apotecanatura.it/wp-content/uploads/2020/07/Immagine-1-Copertina-2-1-1024x684.jpg' ,),
                             ],
                           ),
                         ),

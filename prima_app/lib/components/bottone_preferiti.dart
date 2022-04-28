@@ -69,10 +69,10 @@ class _BottonePreferitiState extends State<BottonePreferiti> {
       icon: favorite
           ? const Icon(
         Icons.bookmark,
-        color: Colors.black45,
+        color: Colors.blue,
       ) : const Icon(
         Icons.bookmark_outline,
-        color: Colors.black45,),
+        color: Colors.blue,),
       ),
     );
   }
