@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prima_app/components/background_dettagli.dart';
+import 'package:prima_app/components/bottone_preferiti.dart';
 import 'package:prima_app/components/foto_dettaglio.dart';
 import 'package:prima_app/components/info_citta.dart';
 import 'package:prima_app/components/titolo.dart';
@@ -22,31 +23,25 @@ class DettaglioMeta extends StatelessWidget {
               Positioned(
                 left: 24,
                 top: 32,
-                child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                child: Container(
+                  height: 40,
+                  width: 70,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)
                   ),
-                  child: const Icon(
-                    Icons.arrow_back_ios_outlined,
-                    color: Colors.black45,
-                  ),
+                  child: IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(
+                        Icons.arrow_back_outlined,
+                        color: Colors.black45,
+                      )),
                 ),
               ),
               Positioned(
-                right: 24,
-                top: 32,
-                child: ElevatedButton(
-                  onPressed: () => print('object'),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
-                  ),
-                  child: const Icon(
-                    Icons.bookmark,
-                    color: Colors.black45,
-                  ),
-                ),
-              ),
+                  right: 24,
+                  top: 32,
+                  child: BottonePreferiti(meta)),
               Positioned(
                   bottom: 0,
                   left: 0,

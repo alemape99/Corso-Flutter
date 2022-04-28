@@ -27,19 +27,19 @@ class CategoryCard extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(16)
+                borderRadius: const BorderRadius.all(Radius.circular(8)
                 ),
                 color: color,
               ),
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: Icon(icona),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top:8.0),
+              padding: const EdgeInsets.only(top:8),
               child: Text(text),
             )
           ],

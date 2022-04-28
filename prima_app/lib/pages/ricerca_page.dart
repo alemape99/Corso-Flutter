@@ -76,7 +76,7 @@ class _RicercaPageState extends State<RicercaPage> {
       setState(() {
         _risultatiRicerca = MetaTuristica.listaMete
             .where((meta) =>
-                meta.city.toLowerCase().contains(parolaDiRicerca.toLowerCase()))
+                meta.city.toLowerCase().contains(parolaDiRicerca.toLowerCase()) && _additionalFiltersfor(meta))
             .toList();
       });
     }

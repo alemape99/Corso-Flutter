@@ -4,8 +4,9 @@ import 'package:prima_app/models/meta_turistica.dart';
 class FilterDrawer extends StatefulWidget {
   final RangeValues selectedRating;
   final String? selectedcountry;
-  final Function({int minRating, int maxRating, String? country, bool? available}) setFilters;
   final bool available;
+
+  final Function({int minRating, int maxRating, String? country, bool? available}) setFilters;
 
   const FilterDrawer(
       {required this.selectedRating, required this.setFilters, this.selectedcountry, this.available = false, Key? key})
@@ -24,12 +25,14 @@ class _FilterDrawerState extends State<FilterDrawer> {
   @override
   void initState() {
     super.initState();
-    _selectedRating = widget.selectedRating;
-    _selectedCountry = widget.selectedcountry;
     _countryList =
         MetaTuristica.listaMete.map((meta) => meta.country).toSet().toList();
     _countryList.sort();
+    _selectedRating = widget.selectedRating;
+    _selectedCountry = widget.selectedcountry;
     _avaliable = widget.available;
+
+
   }
 
   @override
