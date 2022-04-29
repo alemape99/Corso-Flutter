@@ -182,6 +182,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
                       const SizedBox(
                         height: 30,
                       ),
+                      //Aggiungere min price e max price
+                      const SizedBox(
+                        height: 30,
+                      ),
                       Row(
                         children: const [
                           Text('Raccomanded',
@@ -189,11 +193,14 @@ class _FilterDrawerState extends State<FilterDrawer> {
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20),
                           ),
-                          Icon(Icons.done_outlined)
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Icon(Icons.thumb_up_alt_outlined),
+                          )
                         ],
                       ),
                       SwitchListTile(
-                          title: const Text('Available'),
+                          title: const Text('Raccomanded'),
                           value: _raccomanded ?? false,
                           onChanged: (toogle){
                             setState(() {
