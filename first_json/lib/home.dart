@@ -41,6 +41,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -71,16 +74,26 @@ class _HomeState extends State<Home> {
                           child: CircularProgressIndicator(),
                         );
                       }
-                      return ListTile(
-                        title: Text('${listUsers[index].firstName} ${listUsers[index].lastName}'),
-                        subtitle: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(listUsers[index].phone),
-                              Text(listUsers[index].university)
-                            ],
+                      return Card(
+                        shape: RoundedRectangleBorder(
+                          side: const  BorderSide(color: Colors.grey, width: 1.0),
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: ListTile(
+                          title: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text('${listUsers[index].firstName} ${listUsers[index].lastName} '),
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Gender: ${listUsers[index].gender}'),
+                                Text('Phone Number: ${listUsers[index].phone}'),
+                                Text('Address: ${listUsers[index].address}'),
+                                Text('University: ${listUsers[index].university}')
+                              ],
+                            ),
                           ),
                         ),
                       );
