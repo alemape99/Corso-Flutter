@@ -8,7 +8,7 @@ part 'address.g.dart';
 )
 class Address {
   final String address;
-  final String city;
+  final String? city;
   final Coordinates coordinates;
   final String postalCode;
   final String state;

@@ -20,11 +20,11 @@ class Users {
   final String phone;
   final String username;
   final String password;
-  final String birthdate;
+  final String birthDate;
   final String image;
   final String bloodGroup;
   final int height;
-  final int weight;
+  final double weight;
   final String eyeColor;
   final Hair hair;
   final String domain;
@@ -38,7 +38,6 @@ class Users {
   final String ssn;
   final String userAgent;
 
-
   Users({
     required this.id,
     required this.firstName,
@@ -50,7 +49,7 @@ class Users {
     required this.phone,
     required this.username,
     required this.password,
-    required this.birthdate,
+    required this.birthDate,
     required this.image,
     required this.bloodGroup,
     required this.height,
