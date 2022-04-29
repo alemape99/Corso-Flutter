@@ -5,11 +5,12 @@ class FilterDrawer extends StatefulWidget {
   final RangeValues selectedRating;
   final String? selectedcountry;
   final bool available;
+  final bool raccomanded;
 
-  final Function({int minRating, int maxRating, String? country, bool? available}) setFilters;
+  final Function({int minRating, int maxRating, String? country, bool? available, bool? raccomanded}) setFilters;
 
   const FilterDrawer(
-      {required this.selectedRating, required this.setFilters, this.selectedcountry, this.available = false, Key? key})
+      {required this.selectedRating, required this.setFilters, this.selectedcountry, this.available = false, this.raccomanded = false, Key? key})
       : super(key: key);
 
   @override
@@ -21,6 +22,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
   late List<String> _countryList;
   String? _selectedCountry;
   late bool? _avaliable;
+  late bool? _raccomanded;
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
     _selectedRating = widget.selectedRating;
     _selectedCountry = widget.selectedcountry;
     _avaliable = widget.available;
+    _raccomanded = widget.raccomanded;
 
 
   }
@@ -176,6 +179,28 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           });
                           }
                       ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        children: const [
+                          Text('Raccomanded',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20),
+                          ),
+                          Icon(Icons.done_outlined)
+                        ],
+                      ),
+                      SwitchListTile(
+                          title: const Text('Available'),
+                          value: _raccomanded ?? false,
+                          onChanged: (toogle){
+                            setState(() {
+                              _raccomanded = toogle;
+                            });
+                          }
+                      ),
                     ],
                   ),
                 ),
@@ -189,6 +214,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                   ElevatedButton(
                       onPressed: () {
                         setState(() {
+                          _raccomanded = null;
                           _avaliable = null;
                           _selectedCountry = null;
                           _selectedRating = const RangeValues(1,5);
@@ -205,6 +231,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             maxRating: _selectedRating.end.toInt(),
                             country: _selectedCountry,
                             available: _avaliable == false ? null : _avaliable,
+                            raccomanded: _raccomanded == false ? null : _raccomanded
                         );
                         Navigator.of(context).pop();
                       },

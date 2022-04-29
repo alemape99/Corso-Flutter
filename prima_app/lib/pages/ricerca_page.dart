@@ -19,6 +19,7 @@ class _RicercaPageState extends State<RicercaPage> {
   late int _maxRating;
   String? _country;
   bool? _available;
+  bool? _raccomanded;
   late final GlobalKey<ScaffoldState> _scaffoldKey;
 
 
@@ -46,11 +47,14 @@ class _RicercaPageState extends State<RicercaPage> {
     int maxRating = 5,
     String? country,
     bool? available,
+    bool? raccomanded
+
   }) {
     _minRating = minRating;
     _maxRating = maxRating;
     _country = country;
     _available = available;
+    _raccomanded = raccomanded;
 
     _filtraMete(_paroladiRicerca ?? '');
   }
@@ -61,7 +65,10 @@ class _RicercaPageState extends State<RicercaPage> {
         (_country == null || meta.country == _country) &&
         (_available == null ||
             _available == false ||
-            meta.available == _available);
+            meta.available == _available) &&
+    (_raccomanded == null ||
+        _raccomanded == false ||
+        meta.raccomanded == _raccomanded);
   }
 
   void _filtraMete(String parolaDiRicerca) {
@@ -118,6 +125,7 @@ class _RicercaPageState extends State<RicercaPage> {
         setFilters: _setadditionalFilters,
         selectedcountry: _country,
         available: _available ?? false,
+        raccomanded: _raccomanded ?? false,
       ),
       endDrawerEnableOpenDragGesture: false,
       body: Padding(
