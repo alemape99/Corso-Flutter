@@ -34,22 +34,23 @@ class Favorites extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 16),
-        child: PreferenceBuilder<List<String>>(
-          preference: sp.getStringList('preferiti', defaultValue: []),
-          builder: (context, _preferenceResult){
-            List<MetaTuristica> metePreferite = getMetePreferite(_preferenceResult);
-            return ListView.builder(
-                itemCount: metePreferite.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 100,
-                    child:
-                    ListePrecisePaesi(metePreferite[index]),
-                  );
-                }
-            );
-          }
-        ),
+        child:
+            PreferenceBuilder<List<String>>(
+              preference: sp.getStringList('preferiti', defaultValue: []),
+              builder: (context, _preferenceResult){
+                List<MetaTuristica> metePreferite = getMetePreferite(_preferenceResult);
+                return ListView.builder(
+                    itemCount: metePreferite.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 100,
+                        child:
+                        ListePrecisePaesi(metePreferite[index]),
+                      );
+                    }
+                );
+              }
+            ),
       ),
     );
   }
