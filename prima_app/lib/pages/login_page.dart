@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prima_app/components/form_widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget {
                           child: ElevatedButton(
                               onPressed: ()  async {
                                 if(_formkey.currentState?.validate() ?? false) {
-                                  SharedPreferences sp = await SharedPreferences.getInstance();
+                                  StreamingSharedPreferences sp = await StreamingSharedPreferences.instance;
                                   sp.setBool('loggato', true );
                                   Navigator.of(context).popAndPushNamed('/home');
                                 }

@@ -4,14 +4,15 @@ import 'package:prima_app/pages/home.dart';
 import 'package:prima_app/pages/login_page.dart';
 import 'package:prima_app/pages/reindirizzamento.dart';
 import 'package:prima_app/pages/ricerca_page.dart';
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
-generateRoutes(){
+generateRoutes(StreamingSharedPreferences sp){
   return{
     '/' : (context) => const Reindirizzamento(),
     '/login' : (context) => LoginPage(),
     '/home' : (context) => const Home(),
     '/profile' : (context) => const Account(),
-    '/favorite' : (context) => const Favorites(),
+    '/favorite' : (context) => Favorites(sp),
     '/search' : (context) => const RicercaPage(),
   };
 }

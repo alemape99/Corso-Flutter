@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prima_app/models/meta_turistica.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 class BottonePreferiti extends StatefulWidget {
   final MetaTuristica metaTuristica;
@@ -11,18 +11,19 @@ class BottonePreferiti extends StatefulWidget {
 }
 
 class _BottonePreferitiState extends State<BottonePreferiti> {
-  late bool favorite;
+  late bool favorite = false;
+
   void initializeSharedPreferences() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    final _preferiti = sp.getStringList('preferiti') ?? [];
+    StreamingSharedPreferences sp = await StreamingSharedPreferences.instance;
+    final _preferiti = sp.getStringList('preferiti', defaultValue: []).getValue();
     setState(() {
       favorite = _preferiti.contains(widget.metaTuristica.city);
     });
   }
 
   Future<void> addRemovePreferiti() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    var _preferiti = sp.getStringList('preferiti') ?? [];
+    StreamingSharedPreferences sp = await StreamingSharedPreferences.instance;
+    var _preferiti = sp.getStringList('preferiti', defaultValue: []).getValue();
     if (favorite) {
       _preferiti.remove(widget.metaTuristica.city);
     }  else{

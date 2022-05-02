@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:prima_app/components/app_drawer.dart';
-import 'package:prima_app/components/categorie.dart';
 import 'package:prima_app/components/popular_place.dart';
 import 'package:prima_app/components/recomended_place.dart';
 import 'package:prima_app/components/ricerca.dart';
@@ -53,6 +52,7 @@ class Home extends StatelessWidget {
             Ricerca(amIOnHomepage: true),
             Titolo(text: 'Popular Place'),
             PopularPlace(height: 150),
+            SizedBox(height: 50,),
             Titolo(
               text: 'Raccomended Place',
             ),

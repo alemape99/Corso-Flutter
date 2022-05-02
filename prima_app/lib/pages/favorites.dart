@@ -1,35 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:prima_app/components/liste_precise_paesi.dart';
 import 'package:prima_app/models/meta_turistica.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
-class Favorites extends StatefulWidget {
-    const Favorites({ Key? key}) : super(key: key);
+class Favorites extends StatelessWidget {
+  final StreamingSharedPreferences sp;
+    const Favorites(this.sp,{ Key? key}) : super(key: key);
 
-  @override
-  State<Favorites> createState() => _FavoritesState();
-}
-
-class _FavoritesState extends State<Favorites> {
-  List<MetaTuristica> listmete = [];
-
-  void initializeSharedPreferences() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    final _preferiti = sp.getStringList('preferiti') ?? [];
-    setState(() {
-      MetaTuristica.listaMete.forEach((meta) {
-        if (_preferiti.contains(meta.city)) {
-          listmete.add(meta);
+    List<MetaTuristica> getMetePreferite(List<String> _preferences) {
+      List<MetaTuristica> metePreferite = [];
+      for (var meta in MetaTuristica.listaMete) {
+        if (_preferences.contains(meta.city)) {
+          metePreferite.add(meta);
         }
-      });
-    });
-  }
-
-  @override
-  void initState(){
-    super.initState();
-    initializeSharedPreferences();
-  }
+      }
+      return metePreferite;
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +34,24 @@ class _FavoritesState extends State<Favorites> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 16),
-        child: ListView.builder(
-            itemCount: listmete.length,
-            itemBuilder: (context, index) {
-        return Container(
-          height: 100,
-          child:
-          ListePrecisePaesi(MetaTuristica.listaMete[index]),
-        );}),
+        child: PreferenceBuilder<List<String>>(
+          preference: sp.getStringList('preferiti', defaultValue: []),
+          builder: (context, _preferenceResult){
+            List<MetaTuristica> metePreferite = getMetePreferite(_preferenceResult);
+            return ListView.builder(
+                itemCount: metePreferite.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 100,
+                    child:
+                    ListePrecisePaesi(metePreferite[index]),
+                  );
+                }
+            );
+          }
+        ),
       ),
     );
   }
 }
+
