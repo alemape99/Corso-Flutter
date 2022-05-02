@@ -43,10 +43,14 @@ class ListePrecisePaesi extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          meta.city,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                        Row(
+                          children: [
+                            Text(
+                              meta.city,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ],
                         ),
                         const Padding(
                           padding: EdgeInsets.only(top: 8.0),
