@@ -1,5 +1,6 @@
-import 'package:social_app/models/location.dart';
+
 import 'package:json_annotation/json_annotation.dart';
+import 'package:social_app/models/location.dart';
 
 part 'user.g.dart';
 
