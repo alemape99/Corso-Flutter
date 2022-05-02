@@ -20,7 +20,7 @@ class ApiTag{
         'Errore in ricevere gli utenti:'
             '${response.body} ');
   }
-  static Future<TagResponse> getPostfotTag(List<String> tags ) async {
+  static Future<TagResponse> getPostfotTag(String tags ) async {
     final response = await http.get(Uri.parse('$baseUrl/tag/$tags/post'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11',});
 
