@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:prima_app/components/categorie.dart';
+import 'package:prima_app/models/interessi.dart';
 import 'package:prima_app/models/meta_turistica.dart';
 
 class FilterDrawer extends StatefulWidget {
@@ -6,11 +8,12 @@ class FilterDrawer extends StatefulWidget {
   final String? selectedcountry;
   final bool available;
   final bool raccomanded;
+  final List<Interessi> interessi;
 
-  final Function({int minRating, int maxRating, String? country, bool? available, bool? raccomanded}) setFilters;
+  final Function({int minRating, int maxRating, String? country, bool? available, bool? raccomanded, List<Interessi> interessi}) setFilters;
 
   const FilterDrawer(
-      {required this.selectedRating, required this.setFilters, this.selectedcountry, this.available = false, this.raccomanded = false, Key? key})
+      {required this.selectedRating, required this.setFilters, this.selectedcountry, this.available = false, this.raccomanded = false, required this.interessi, Key? key})
       : super(key: key);
 
   @override
@@ -23,6 +26,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
   String? _selectedCountry;
   late bool? _avaliable;
   late bool? _raccomanded;
+  late List<Interessi> _interessi;
 
   @override
   void initState() {
@@ -34,8 +38,21 @@ class _FilterDrawerState extends State<FilterDrawer> {
     _selectedCountry = widget.selectedcountry;
     _avaliable = widget.available;
     _raccomanded = widget.raccomanded;
+    _interessi = widget.interessi;
+  }
 
-
+  void modificaLista(Interessi? interesse) {
+    setState(() {
+      if (interesse == null) {
+        _interessi = [];
+      } else {
+        if (_interessi.contains(interesse)) {
+          _interessi.remove(interesse);
+        } else {
+          _interessi.add(interesse);
+        }
+      }
+    });
   }
 
   @override
@@ -62,6 +79,10 @@ class _FilterDrawerState extends State<FilterDrawer> {
                 child: Form(
                   child: ListView(
                     children: [
+                      Categorie(_interessi, modificaLista, height: 100),
+                      const SizedBox(
+                        height: 30,
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -225,6 +246,7 @@ class _FilterDrawerState extends State<FilterDrawer> {
                           _avaliable = null;
                           _selectedCountry = null;
                           _selectedRating = const RangeValues(1,5);
+                          _interessi = [];
                         });
                       },
                       child: const Padding(
@@ -238,7 +260,8 @@ class _FilterDrawerState extends State<FilterDrawer> {
                             maxRating: _selectedRating.end.toInt(),
                             country: _selectedCountry,
                             available: _avaliable == false ? null : _avaliable,
-                            raccomanded: _raccomanded == false ? null : _raccomanded
+                            raccomanded: _raccomanded == false ? null : _raccomanded,
+                            interessi: _interessi
                         );
                         Navigator.of(context).pop();
                       },

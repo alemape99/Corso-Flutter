@@ -5,7 +5,14 @@ import 'package:prima_app/models/interessi.dart';
 
 class Categorie extends StatelessWidget {
   final double height;
-  const Categorie({required this.height, Key? key}) : super(key: key);
+  final List<Interessi> interessiSelezionati;
+  final Function (Interessi?) callback;
+
+
+  const Categorie(this.interessiSelezionati, this.callback,{required this.height, Key? key}) : super(key: key);
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +31,27 @@ class Categorie extends StatelessWidget {
                 if (index == 0) {
                   return Row(
                     children: [
-                      const CategoryCard(
+                      CategoryCard(
+                        null,
+                        interessiSelezionati.isEmpty,
+                        callback,
                         color: Colors.red,
                         icona: Icons.spa,
                         text: 'all',
                       ),
                       CategoryCard(
-                        color: Interessi.values[index].colore,
-                        icona: Interessi.values[index].icon,
-                        text: Interessi.values[index].name,
+                        Interessi.values[index],
+                        interessiSelezionati.contains(Interessi.values[index]),
+                        callback,
                         marginRight: index != (Interessi.values.length - 1),
                       )
                     ],
                   );
                 }
                 return CategoryCard(
-                  color: Interessi.values[index].colore,
-                  icona: Interessi.values[index].icon,
-                  text: Interessi.values[index].name,
+                  Interessi.values[index],
+                  interessiSelezionati.contains(Interessi.values[index]),
+                  callback,
                   marginRight: index != (Interessi.values.length - 1),
                 );
               }),

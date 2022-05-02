@@ -86,14 +86,14 @@ class _HomeState extends State<Home> {
                           subtitle: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Gender: ${listUsers[index].gender}'),
-                                Text('Phone Number: ${listUsers[index].phone}'),
-                                Text('Address: ${listUsers[index].address}'),
-                                Text('University: ${listUsers[index].university}')
-                              ],
-                            ),
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Gender: ${listUsers[index].gender}'),
+                                  Text('Phone Number: ${listUsers[index].phone}'),
+                                  Text('Address: ${listUsers[index].address}'),
+                                  Text('University: ${listUsers[index].university}')
+                                ],
+                              ),
                           ),
                         ),
                       );

@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:prima_app/components/filter_drawer.dart';
 import 'package:prima_app/components/liste_precise_paesi.dart';
 import 'package:prima_app/components/ricerca.dart';
+import 'package:prima_app/models/interessi.dart';
 import 'package:prima_app/models/meta_turistica.dart';
 
 class RicercaPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _RicercaPageState extends State<RicercaPage> {
   String? _country;
   bool? _available;
   bool? _raccomanded;
+  late List<Interessi> _interessi;
   late final GlobalKey<ScaffoldState> _scaffoldKey;
 
 
@@ -31,6 +33,7 @@ class _RicercaPageState extends State<RicercaPage> {
     _maxRating = 5;
     _risultatiRicerca = MetaTuristica.listaMete;
     _scaffoldKey = GlobalKey();
+    _interessi = [];
 
     SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
       final modalArgs = ModalRoute.of(context)?.settings.arguments ?? {};
@@ -47,7 +50,8 @@ class _RicercaPageState extends State<RicercaPage> {
     int maxRating = 5,
     String? country,
     bool? available,
-    bool? raccomanded
+    bool? raccomanded,
+    List<Interessi> interessi =  const []
 
   }) {
     _minRating = minRating;
@@ -55,20 +59,18 @@ class _RicercaPageState extends State<RicercaPage> {
     _country = country;
     _available = available;
     _raccomanded = raccomanded;
+    _interessi = interessi;
 
     _filtraMete(_paroladiRicerca ?? '');
   }
 
   bool _additionalFiltersfor(MetaTuristica meta) {
-    return meta.rating >= _minRating &&
-        meta.rating <= _maxRating &&
-        (_country == null || meta.country == _country) &&
-        (_available == null ||
-            _available == false ||
-            meta.available == _available) &&
-    (_raccomanded == null ||
-        _raccomanded == false ||
-        meta.raccomanded == _raccomanded);
+    return meta.rating >= _minRating
+        && meta.rating <= _maxRating
+        && (_country == null || meta.country == _country)
+        && (_available == null || _available == false || meta.available == _available)
+        && (_raccomanded == null || _raccomanded == false || meta.raccomanded == _raccomanded)
+        && (_interessi.isEmpty || (meta.interessi?.any((interesse) => _interessi.contains(interesse)) ?? false ));
   }
 
   void _filtraMete(String parolaDiRicerca) {
@@ -126,6 +128,7 @@ class _RicercaPageState extends State<RicercaPage> {
         selectedcountry: _country,
         available: _available ?? false,
         raccomanded: _raccomanded ?? false,
+        interessi: _interessi,
       ),
       endDrawerEnableOpenDragGesture: false,
       body: Padding(
