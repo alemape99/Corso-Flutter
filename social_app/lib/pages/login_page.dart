@@ -24,15 +24,15 @@ class LoginPage extends StatelessWidget {
           const Text(
             'Social App',
             style: TextStyle(
-                fontSize: 35,
+                fontSize: 45,
                 fontWeight: FontWeight.bold,
                 color: Colors.purple),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 16),
             child: Text(
-              'Choose the account of your Social App to login',
-              style: TextStyle(fontSize: 14),
+              'Benvenuto su Social App',
+              style: TextStyle(fontSize: 16),
             ),
           ),
           const SizedBox(
@@ -60,6 +60,17 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 50,),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.purple,
+              borderRadius: BorderRadius.circular(16)
+            ),
+            child: const Text(
+              'Per accedere scegli uno dei due account',
+              style: TextStyle(fontSize: 15,color: Colors.white),),
           )
         ],
       ),

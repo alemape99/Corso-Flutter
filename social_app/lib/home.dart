@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
                 '/login',
                     (Route<dynamic> route) => false);
           },
-          icon: Icon(Icons.close)),
+          icon: const Icon(Icons.close)),
     );
   }
 }
