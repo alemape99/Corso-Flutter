@@ -57,7 +57,7 @@ class PostCard extends StatelessWidget {
             ),
             const SizedBox(height: 5,),
             Chip(
-                label:Text((post.tags).toString()
+                label:Text((post.tags).toString(),
                 ),
             ),
             Divider(
