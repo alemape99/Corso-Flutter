@@ -11,12 +11,14 @@ class ApiUser {
     final response = await http.get(Uri.parse('$baseUrl/user?page=$page&limit=$limit'), headers: {
       'app-id': '626fc92ee000f64b3bf05f11'});
 
+
     if (response.statusCode == 200) {
       return ListUserResponse.fromJson(jsonDecode(response.body));
     }
     throw Exception('Errore in ricevere gli utenti:'
         '${response.body} ');
   }
+
 
   static Future<User> getDeatilsFor(String id ) async {
     final response = await http.get(Uri.parse('$baseUrl/user/$id'),

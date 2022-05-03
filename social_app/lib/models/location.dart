@@ -4,18 +4,18 @@ part 'location.g.dart';
 
 @JsonSerializable()
 class Location{
-  final String street;
-  final String city;
-  final String state;
-  final String country;
-  final String timezone;
+  final String? street;
+  final String? city;
+  final String? state;
+  final String? country;
+  final String? timezone;
 
   Location({
-    required this.street,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.timezone,
+    this.street,
+    this.city,
+    this.state,
+    this.country,
+    this.timezone,
   });
   factory Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
 
