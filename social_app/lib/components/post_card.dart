@@ -31,7 +31,11 @@ class PostCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${post.owner.firstName} ${post.owner.lastName}'),
+                    Text('${post.owner.firstName} ${post.owner.lastName}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Row(
                       children: [
                         Text(post.publishDate),
