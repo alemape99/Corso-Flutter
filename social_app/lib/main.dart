@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/home.dart';
+import 'package:social_app/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Social App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Home(),
+      initialRoute: '/',
+      routes: generateRoutes(),
     );
   }
 }
