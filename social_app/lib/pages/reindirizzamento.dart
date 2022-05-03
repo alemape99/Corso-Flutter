@@ -13,7 +13,7 @@ class Reindirizzamento extends StatefulWidget {
 class _ReindirizzamentoState extends State<Reindirizzamento> {
   bool _loggato = false;
 
-  void initializeSharedPreferences() async{
+  void initializeSharedPreferences() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     setState(() {
       _loggato = (sp.getString('loggedUserId') != null) ? true : false;
@@ -28,6 +28,6 @@ class _ReindirizzamentoState extends State<Reindirizzamento> {
 
   @override
   Widget build(BuildContext context) {
-    return _loggato == true ? const Home() : LoginPage();
+    return _loggato == true ? const Home() : const LoginPage();
   }
 }

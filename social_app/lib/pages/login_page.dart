@@ -21,12 +21,12 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          const Text(
+           Text(
             'Social App',
             style: TextStyle(
                 fontSize: 45,
                 fontWeight: FontWeight.bold,
-                color: Colors.purple),
+                color: Colors.purple.shade400),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 16),
@@ -38,34 +38,37 @@ class LoginPage extends StatelessWidget {
           const SizedBox(
             height: 50,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children:  [
-              Expanded(
-                child: LoginCard(
-                    User(
-                        id: "60d0fe4f5311236168a109cd",
-                        firstName: "Roberto",
-                        lastName: "Vega",
-                        picture:"https://randomuser.me/api/portraits/med/men/25.jpg")
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children:  [
+                Expanded(
+                  child: LoginCard(
+                      User(
+                          id: "60d0fe4f5311236168a109cd",
+                          firstName: "Roberto",
+                          lastName: "Vega",
+                          picture:"https://randomuser.me/api/portraits/med/men/25.jpg")
+                  ),
                 ),
-              ),
-              Expanded(
-                child: LoginCard(
-                    User(
-                        id:"60d0fe4f5311236168a109cf",
-                        firstName: "Carolina",
-                        lastName: "Lima",
-                        picture: "https://randomuser.me/api/portraits/med/women/5.jpg")
+                Expanded(
+                  child: LoginCard(
+                      User(
+                          id:"60d0fe4f5311236168a109cf",
+                          firstName: "Carolina",
+                          lastName: "Lima",
+                          picture: "https://randomuser.me/api/portraits/med/women/5.jpg")
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           const SizedBox(height: 50,),
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.purple,
+              color: Colors.purple.shade400,
               borderRadius: BorderRadius.circular(16)
             ),
             child: const Text(
