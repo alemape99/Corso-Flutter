@@ -5,23 +5,23 @@ part 'post.g.dart';
 
 @JsonSerializable()
 class Post {
-  final String id;
-  final String text;
-  final String image;
-  final int likes;
-  final String link;
-  final List<String> tags;
-  final String publishDate;
+  final String? id;
+  final String? text;
+  final String? image;
+  final int? likes;
+  final String? link;
+  final List<String>? tags;
+  final String? publishDate;
   final User owner;
 
   Post({
-    required this.id,
-    required this.text,
-    required this.image,
-    required this.likes,
-    required this.link,
-    required this.tags,
-    required this.publishDate,
+    this.id,
+    this.text,
+    this.image,
+    this.likes,
+    this.link,
+    this.tags,
+    this.publishDate,
     required this.owner
   });
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);

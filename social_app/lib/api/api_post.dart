@@ -8,7 +8,7 @@ import 'package:social_app/models/post_response.dart';
 class ApiPost{
   static String get baseUrl => 'https://dummyapi.io/data/v1';
 
-  static Future<PostResponse> getUserList({int page = 0, int limit = 20}) async {
+  static Future<PostResponse> getPostList({int page = 0, int limit = 20}) async {
 
     final response = await http.get(
         Uri.parse('$baseUrl/post?page=$page&limit=$limit'),

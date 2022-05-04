@@ -36,10 +36,10 @@ class LoginCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(user.firstName!,
+                Text(user.firstName,
                     style: const TextStyle(fontSize: 20, color: Colors.white)),
                 const SizedBox(width: 5),
-                Text(user.lastName!,
+                Text(user.lastName,
                     style: const TextStyle(fontSize: 20, color: Colors.white)),
               ],
             ),

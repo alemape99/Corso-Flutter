@@ -22,7 +22,7 @@ class PostCard extends StatelessWidget {
                 CircleAvatar(
                   radius: 15,
                   backgroundImage: NetworkImage(
-                    post.image,
+                    post.image ?? '',
                   ),
                 ),
                 const SizedBox(
@@ -38,7 +38,7 @@ class PostCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(post.publishDate),
+                        Text(post.publishDate ?? ''),
                         const Icon(
                           Icons.public,
                           size: 15,
@@ -49,10 +49,10 @@ class PostCard extends StatelessWidget {
                 ),
               ],
             ),
-            Text(post.text),
+            Text(post.text ?? ''),
             const SizedBox(height: 5,),
             Image.network(
-              post.image,
+              post.image ?? '',
               width: MediaQuery.of(context).size.width - 30,
             ),
             const SizedBox(height: 5,),
