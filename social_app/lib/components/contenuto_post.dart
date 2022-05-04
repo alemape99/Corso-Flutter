@@ -15,7 +15,9 @@ class _ContenutoPostState extends State<ContenutoPost> {
   late List<Post> _listaPostVisualizzate;
   late bool _hasMorePost;
   late int _skipPost;
+  late int _page;
   late Future<List<Post>> _future;
+
 
   @override
   void initState() {
@@ -23,16 +25,20 @@ class _ContenutoPostState extends State<ContenutoPost> {
     _listaPostVisualizzate = [];
     _hasMorePost = false;
     _skipPost = 0;
+    _page = 0;
     _future = _fetchPost();
+
 
   }
 
   Future<List<Post>> _fetchPost() async {
-    final PostResponse result = await ApiPost.getPostList();
+    final PostResponse result = await ApiPost.getPostList(page: _page);
     setState(() {
       _skipPost = _skipPost + result.limit;
       _hasMorePost = (result.total - _skipPost )> 0;
+      _page++;
       _listaPostVisualizzate = _listaPostVisualizzate + result.data;
+
     });
     return _listaPostVisualizzate;
   }

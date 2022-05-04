@@ -22,7 +22,7 @@ class PostCard extends StatelessWidget {
                 CircleAvatar(
                   radius: 15,
                   backgroundImage: NetworkImage(
-                    post.image ?? '',
+                    post.owner.picture ?? '',
                   ),
                 ),
                 const SizedBox(
