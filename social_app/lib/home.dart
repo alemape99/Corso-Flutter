@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/api/api_post.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/components/contenuto_post.dart';
-import 'package:social_app/components/post_card.dart';
-import 'package:social_app/models/post.dart';
-import 'package:social_app/models/post_response.dart';
-
+import 'package:social_app/pages/profile_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,9 +11,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +20,35 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/icona.png', scale: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                      'assets/icona.png',
+                      scale: 5
+                  ),
+                  IconButton(
+                      onPressed: () async {
+                        SharedPreferences sp =
+                            await SharedPreferences.getInstance();
+                        var _loggedId = sp.getString('loggedUserId');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfilePage(
+                              id: _loggedId!,
+                            ),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.person)),
+                ],
+              ),
               Divider(
                 thickness: 4,
                 color: Colors.purple.shade400,
               ),
-              Expanded(child: const ContenutoPost()),
+              const Expanded(child: ContenutoPost()),
             ],
           ),
         ),

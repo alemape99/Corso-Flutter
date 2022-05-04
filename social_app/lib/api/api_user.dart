@@ -24,6 +24,7 @@ class ApiUser {
     final response = await http.get(Uri.parse('$baseUrl/user/$id'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11'});
 
+
     if (response.statusCode == 200) {
       return User.fromJson(jsonDecode(response.body));
     }

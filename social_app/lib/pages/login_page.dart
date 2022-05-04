@@ -49,7 +49,8 @@ class LoginPage extends StatelessWidget {
                           id: "60d0fe4f5311236168a109cd",
                           firstName: "Roberto",
                           lastName: "Vega",
-                          picture:"https://randomuser.me/api/portraits/med/men/25.jpg")
+                          picture:"https://randomuser.me/api/portraits/med/men/25.jpg"
+                      ),
                   ),
                 ),
                 Expanded(
@@ -58,7 +59,8 @@ class LoginPage extends StatelessWidget {
                           id:"60d0fe4f5311236168a109cf",
                           firstName: "Carolina",
                           lastName: "Lima",
-                          picture: "https://randomuser.me/api/portraits/med/women/5.jpg")
+                          picture: "https://randomuser.me/api/portraits/med/women/5.jpg"
+                      ),
                   ),
                 ),
               ],

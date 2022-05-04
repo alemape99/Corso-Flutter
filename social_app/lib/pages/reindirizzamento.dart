@@ -16,7 +16,8 @@ class _ReindirizzamentoState extends State<Reindirizzamento> {
   void initializeSharedPreferences() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     setState(() {
-      _loggato = (sp.getString('loggedUserId') != null) ? true : false;
+      _loggato = (sp.getString('loggedUserId') != null);
+
     });
   }
 
