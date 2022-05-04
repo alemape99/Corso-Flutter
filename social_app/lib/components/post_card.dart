@@ -56,9 +56,8 @@ class PostCard extends StatelessWidget {
               width: MediaQuery.of(context).size.width - 30,
             ),
             const SizedBox(height: 5,),
-            Chip(
-                label:Text((post.tags).toString(),
-                ),
+            Wrap(
+              children: post.tags!= null ? post.tags!.map((tag) => Chip(label: Text(tag))).toList() : [],
             ),
             Divider(
               thickness: 2,
