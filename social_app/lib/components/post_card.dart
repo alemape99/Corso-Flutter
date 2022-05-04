@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/models/post.dart';
+import 'package:intl/intl.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
@@ -9,9 +10,8 @@ class PostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.purple.shade400),
-          borderRadius: BorderRadius.circular(16)
-      ),
+          border: Border.all(color: Colors.purple.shade400),
+          borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -31,14 +31,19 @@ class PostCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${post.owner.firstName} ${post.owner.lastName}',
+                    Text(
+                      '${post.owner.firstName} ${post.owner.lastName}',
                       style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Row(
                       children: [
-                        Text(post.publishDate ?? ''),
+                        if (post.publishDate != null)
+                          Text(
+                            DateFormat("d/M/y HH:mm")
+                                .format(DateTime.parse(post.publishDate!)),
+                          ),
                         const Icon(
                           Icons.public,
                           size: 15,
@@ -50,16 +55,21 @@ class PostCard extends StatelessWidget {
               ],
             ),
             Text(post.text ?? ''),
-            const SizedBox(height: 5,),
+            const SizedBox(
+              height: 5,
+            ),
             Image.network(
               post.image ?? '',
               width: MediaQuery.of(context).size.width - 30,
             ),
-            const SizedBox(height: 5,),
-            if(post.tags!= null)
-            Wrap(
-              children: post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
+            const SizedBox(
+              height: 5,
             ),
+            if (post.tags != null)
+              Wrap(
+                children:
+                    post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
+              ),
             Divider(
               thickness: 2,
               color: Colors.purple.shade400,
@@ -72,7 +82,9 @@ class PostCard extends StatelessWidget {
                   child: Row(
                     children: [
                       const Icon(Icons.thumb_up),
-                      const SizedBox(width: 4,),
+                      const SizedBox(
+                        width: 4,
+                      ),
                       Text('Likes: ${(post.likes).toString()}')
                     ],
                   ),
@@ -85,7 +97,9 @@ class PostCard extends StatelessWidget {
                   child: Row(
                     children: const [
                       Icon(Icons.mode_comment_outlined),
-                      SizedBox(width: 4,),
+                      SizedBox(
+                        width: 4,
+                      ),
                       Text('Comment'),
                     ],
                   ),
@@ -98,7 +112,9 @@ class PostCard extends StatelessWidget {
                   child: Row(
                     children: const [
                       Icon(Icons.share_outlined),
-                      SizedBox(width: 4,),
+                      SizedBox(
+                        width: 4,
+                      ),
                       Text('Share'),
                     ],
                   ),
