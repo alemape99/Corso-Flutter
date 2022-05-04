@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/models/post.dart';
 import 'package:intl/intl.dart';
+import 'package:social_app/pages/profile_page.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
@@ -19,10 +20,21 @@ class PostCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 23,
-                  backgroundImage: NetworkImage(
-                    post.owner.picture ?? '',
+                GestureDetector(
+                  onTap: () {Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfilePage(
+                        id: post.owner.id!,
+                      ),
+                    ),
+                  );
+                    },
+                  child: CircleAvatar(
+                    radius: 23,
+                    backgroundImage: NetworkImage(
+                      post.owner.picture ?? '',
+                    ),
                   ),
                 ),
                 const SizedBox(

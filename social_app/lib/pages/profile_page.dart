@@ -106,10 +106,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(
                       height: 5,
                     ),
-                    if (user.gender != null )
+                    if (user.gender != null)
                       Row(
                         children:  [
-                          const Icon(Icons.female),
+                          Icon(user.gender == 'male' ? Icons.male : Icons.female),
                           const SizedBox(width: 5,),
                           Text(user.gender!)
                         ],
