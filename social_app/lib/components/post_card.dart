@@ -67,6 +67,7 @@ class PostCard extends StatelessWidget {
             ),
             if (post.tags != null)
               Wrap(
+                spacing: 6,
                 children:
                     post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
               ),
