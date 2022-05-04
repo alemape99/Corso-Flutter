@@ -42,7 +42,7 @@ class PostCard extends StatelessWidget {
                         const Icon(
                           Icons.public,
                           size: 15,
-                        )
+                        ),
                       ],
                     ),
                   ],
