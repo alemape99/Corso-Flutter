@@ -45,35 +45,47 @@ class _ContenutoPostState extends State<ContenutoPost> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _future,
-        builder: (context, snapshot){
-          if (snapshot.hasData && snapshot.data is List<Post>) {
-            final _listPost = snapshot.data as List<Post>;
-            return ListView.builder(
-                itemCount: _listPost.length + (_hasMorePost ? 1 : 0),
-                itemBuilder: (context, index){
-                  if (index == _listPost.length) {
-                        _future = _fetchPost();
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: PostCard(_listPost[index]),
-                  );
+    return RefreshIndicator(
+      onRefresh: () {
+        setState(() {
+          _listaPostVisualizzate = [];
+          _hasMorePost = false;
+          _skipPost = 0;
+          _page = 0;
+          _future = _fetchPost();
+        });
+        return Future.value();
+      },
+      child: FutureBuilder(
+          future: _future,
+          builder: (context, snapshot){
+            if (snapshot.hasData && snapshot.data is List<Post>) {
+              final _listPost = snapshot.data as List<Post>;
+              return ListView.builder(
+                  itemCount: _listPost.length + (_hasMorePost ? 1 : 0),
+                  itemBuilder: (context, index){
+                    if (index == _listPost.length) {
+                          _future = _fetchPost();
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: PostCard(_listPost[index]),
+                    );
 
-                }
-            );
+                  }
+              );
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            }
+            return const Center(child: CircularProgressIndicator(),);
           }
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error.toString()),
-            );
-          }
-          return const Center(child: CircularProgressIndicator(),);
-        }
+      ),
     );
   }
 }
