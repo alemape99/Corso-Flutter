@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/components/contenuto_post.dart';
+import 'package:social_app/models/user.dart';
 import 'package:social_app/pages/profile_page.dart';
 
 class Home extends StatefulWidget {

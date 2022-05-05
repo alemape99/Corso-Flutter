@@ -63,7 +63,6 @@ class _ProfilePageState extends State<ProfilePage> {
         title: const Text('Profile'),
       ),
       body: ListView(
-
         children: [
           FutureBuilder(
             future: _futureUser,
