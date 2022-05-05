@@ -15,6 +15,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.purple
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
         title: Image.asset('assets/icona.png'),
