@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/home.dart';
+import 'package:social_app/models/user.dart';
 import 'package:social_app/pages/login_page.dart';
 
 class Reindirizzamento extends StatefulWidget {

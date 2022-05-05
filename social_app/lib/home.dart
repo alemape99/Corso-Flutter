@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:social_app/components/bottone_profilo.dart';
+
 import 'package:social_app/components/contenuto_post.dart';
-import 'package:social_app/models/user.dart';
-import 'package:social_app/pages/profile_page.dart';
+
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+
+  const Home({ Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -28,21 +29,7 @@ class _HomeState extends State<Home> {
                       'assets/icona.png',
                       scale: 5
                   ),
-                  IconButton(
-                      onPressed: () async {
-                        SharedPreferences sp =
-                            await SharedPreferences.getInstance();
-                        var _loggedId = sp.getString('loggedUserId');
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProfilePage(
-                              id: _loggedId!,
-                            ),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.person)),
+                  const BottoneProfilo(),
                 ],
               ),
               Divider(
