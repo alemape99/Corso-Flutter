@@ -15,7 +15,7 @@ class IntestazioneProfilo extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: CircleAvatar(
             radius: 115,
-            backgroundColor: Colors.purple.shade400,
+            backgroundColor: Colors.purple,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.network(
@@ -35,18 +35,18 @@ class IntestazioneProfilo extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        const Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 8.0),
           child: Divider(
             thickness: 3,
-            color: Colors.purple.shade400,
+            color: Colors.purple,
           ),
         ),
         Container(
           padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8),
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.purple.shade400),
+              border: Border.all(color: Colors.purple),
               borderRadius: BorderRadius.circular(16)),
           child: Column(
             children: [

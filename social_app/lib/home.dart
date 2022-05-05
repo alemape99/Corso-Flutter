@@ -15,9 +15,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.purple.shade400,
-        ),
         backgroundColor: Colors.white,
         elevation: 0,
         title: Image.asset('assets/icona.png'),
@@ -25,17 +22,17 @@ class _HomeState extends State<Home> {
           BottoneProfilo(),
         ],
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
-            children: [
+            children: const [
               Divider(
                 thickness: 4,
-                color: Colors.purple.shade400,
+                color: Colors.purple,
               ),
-              const Expanded(
+              Expanded(
                 child: ContenutoPost(),
               ),
             ],

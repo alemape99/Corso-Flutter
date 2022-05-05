@@ -21,12 +21,12 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-           Text(
+           const Text(
             'Social App',
             style: TextStyle(
                 fontSize: 45,
                 fontWeight: FontWeight.bold,
-                color: Colors.purple.shade400),
+                color: Colors.purple),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 16),
@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.purple.shade400,
+              color: Colors.purple,
               borderRadius: BorderRadius.circular(16)
             ),
             child: const Text(

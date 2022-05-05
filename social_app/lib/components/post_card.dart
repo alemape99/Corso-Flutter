@@ -13,7 +13,7 @@ class PostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.purple.shade400),
+          border: Border.all(color: Colors.purple),
           borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -85,9 +85,9 @@ class PostCard extends StatelessWidget {
                 children:
                     post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
               ),
-            Divider(
+            const Divider(
               thickness: 2,
-              color: Colors.purple.shade400,
+              color: Colors.purple,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

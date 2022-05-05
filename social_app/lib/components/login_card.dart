@@ -17,7 +17,7 @@ class LoginCard extends StatelessWidget {
       },
       child: Card(
         elevation: 20,
-        color: Colors.purple.shade400,
+        color: Colors.purple,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32),
         ),
