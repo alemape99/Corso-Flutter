@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:social_app/components/info_intestazione.dart';
 import 'package:social_app/models/user.dart';
 
 class IntestazioneProfilo extends StatelessWidget {
@@ -48,29 +50,23 @@ class IntestazioneProfilo extends StatelessWidget {
               borderRadius: BorderRadius.circular(16)),
           child: Column(
             children: [
-              if (user.location != null && user.location!.city != null)
+              if (user.dateOfBirth != null)
                 Row(
                   children: [
-                    const Icon(Icons.place),
+                    const Icon(Icons.date_range),
                     const SizedBox(
                       width: 5,
                     ),
-                    Text(user.location!.city!)
+                    Text(DateFormat('d/M/y').format(DateTime.parse(user.dateOfBirth!)))
                   ],
                 ),
+              if (user.location != null && user.location!.city != null)
+                InfoIntestazione(icon: Icons.place, testo: user.location!.city!),
               const SizedBox(
                 height: 5,
               ),
               if (user.email != null)
-                Row(
-                  children: [
-                    const Icon(Icons.email),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(user.email!)
-                  ],
-                ),
+                InfoIntestazione(icon: Icons.email, testo: user.email!),
               const SizedBox(
                 height: 5,
               ),
@@ -88,19 +84,7 @@ class IntestazioneProfilo extends StatelessWidget {
                 height: 5,
               ),
               if (user.phone != null)
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.phone,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      user.phone!,
-                    ),
-                  ],
-                ),
+                InfoIntestazione(icon: Icons.phone, testo:  user.phone!),
               const SizedBox(
                 height: 5,
               ),
@@ -110,7 +94,7 @@ class IntestazioneProfilo extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(left: 8, top: 8),
           child: Text(
-            'Post',
+            'Posts',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),

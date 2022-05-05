@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:social_app/models/post.dart';
 import 'package:intl/intl.dart';
+import 'package:social_app/pages/details_post.dart';
 import 'package:social_app/pages/profile_page.dart';
 
 class PostCard extends StatelessWidget {
@@ -106,7 +108,10 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => print('Comment'),
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => DetailsPost(post: post,)
+                    ),
+                  ),
                   child: Row(
                     children: const [
                       Icon(Icons.mode_comment_outlined),
