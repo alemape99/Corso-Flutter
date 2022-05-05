@@ -18,7 +18,7 @@ class IntestazioneProfilo extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
               child: Image.network(
                 user.picture ?? 'https://via.placeholder.com/150',
-                scale: 0.34,
+                scale: 0.35,
               ),
             ),
           ),
