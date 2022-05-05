@@ -3,14 +3,14 @@ import 'package:social_app/models/user.dart';
 
 class IntestazioneProfilo extends StatelessWidget {
   final User user;
-  const IntestazioneProfilo(this.user,{Key? key}) : super(key: key);
+  const IntestazioneProfilo(this.user, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.all(16),
           child: CircleAvatar(
             radius: 115,
             backgroundColor: Colors.purple.shade400,
@@ -29,8 +29,7 @@ class IntestazioneProfilo extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               '${user.firstName} ${user.lastName}',
-              style: const TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -49,8 +48,7 @@ class IntestazioneProfilo extends StatelessWidget {
               borderRadius: BorderRadius.circular(16)),
           child: Column(
             children: [
-              if (user.location != null &&
-                  user.location!.city != null)
+              if (user.location != null && user.location!.city != null)
                 Row(
                   children: [
                     const Icon(Icons.place),
@@ -79,9 +77,7 @@ class IntestazioneProfilo extends StatelessWidget {
               if (user.gender != null)
                 Row(
                   children: [
-                    Icon(user.gender == 'male'
-                        ? Icons.male
-                        : Icons.female),
+                    Icon(user.gender == 'male' ? Icons.male : Icons.female),
                     const SizedBox(
                       width: 5,
                     ),
@@ -115,8 +111,7 @@ class IntestazioneProfilo extends StatelessWidget {
           padding: EdgeInsets.only(left: 8, top: 8),
           child: Text(
             'Post',
-            style:
-            TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),
       ],
