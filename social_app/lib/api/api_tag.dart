@@ -6,7 +6,7 @@ import 'package:social_app/models/tag_response.dart';
 class ApiTag{
   static String get baseUrl => 'https://dummyapi.io/data/v1';
 
-  static Future<TagResponse> getUserList({int page = 0, int limit = 20}) async {
+  static Future<TagResponse> getTagList({int page = 0, int limit = 20}) async {
 
     final response = await http.get(
         Uri.parse('$baseUrl/tag?page=$page&limit=$limit'),
@@ -17,7 +17,7 @@ class ApiTag{
       );
     }
     throw Exception(
-        'Errore in ricevere gli utenti:'
+        'Errore in ricevere i tag:'
             '${response.body} ');
   }
   static Future<TagResponse> getPostfotTag(String tags ) async {
@@ -27,7 +27,7 @@ class ApiTag{
     if (response.statusCode == 200) {
       return TagResponse.fromJson(jsonDecode(response.body));
     }
-    throw Exception('Errore in ricevere gli utenti:'
+    throw Exception('Errore in ricevere i tag:'
         '${response.body} ');
   }
 
