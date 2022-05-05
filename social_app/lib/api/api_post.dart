@@ -32,12 +32,12 @@ class ApiPost{
     throw Exception('Errore in ricevere gli utenti:'
         '${response.body} ');
   }
-  static Future<Post> getDeatilsForUser(String id ) async {
+  static Future<PostResponse> getDeatilsForUser(String id , {int page = 0, int limit = 20}) async {
     final response = await http.get(Uri.parse('$baseUrl/user/$id/post'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11',});
 
     if (response.statusCode == 200) {
-      return Post.fromJson(jsonDecode(response.body));
+      return PostResponse.fromJson(jsonDecode(response.body));
     }
     throw Exception('Errore in ricevere gli utenti:'
         '${response.body} ');

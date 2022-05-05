@@ -1,139 +1,122 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/api/api_post.dart';
 import 'package:social_app/api/api_user.dart';
+import 'package:social_app/components/intestazione_profilo.dart';
+import 'package:social_app/components/post_card.dart';
+import 'package:social_app/models/post.dart';
+import 'package:social_app/models/post_response.dart';
 import 'package:social_app/models/user.dart';
 
 class ProfilePage extends StatefulWidget {
   final String id;
-  const ProfilePage({required this.id,Key? key}) : super(key: key);
+  const ProfilePage({required this.id, Key? key}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late Future<User> _future;
+  late User user;
+  late Future<User> _futureUser;
+
+  late List<Post> _listaPostVisualizzate;
+  late bool _hasMorePost;
+  late int _skipPost;
+  late int _page;
+  late Future<List<Post>> _futurePost;
+
+  Future<User> _fetchUser(String id) async {
+    return user = await ApiUser.getDeatilsFor(id);
+  }
+
+  Future<List<Post>> _fetchPost() async {
+    final PostResponse result =
+        await ApiPost.getDeatilsForUser(widget.id, page: _page);
+    setState(() {
+      _skipPost = _skipPost + result.limit;
+      _hasMorePost = (result.total - _skipPost) > 0;
+      _page++;
+      _listaPostVisualizzate = _listaPostVisualizzate + result.data;
+    });
+    return _listaPostVisualizzate;
+  }
 
   @override
   void initState() {
-    _future = _fetchUser(widget.id);
+    _futureUser = _fetchUser(widget.id);
+
+    _listaPostVisualizzate = [];
+    _hasMorePost = false;
+    _skipPost = 0;
+    _page = 0;
+    _futurePost = _fetchPost();
+
     super.initState();
-
-
-  }
-
-  Future<User> _fetchUser(String id) async {
-    return ApiUser.getDeatilsFor(id);
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple.shade400,
         centerTitle: true,
         title: const Text('Profile'),
       ),
-      body: FutureBuilder(
-        future: _future,
-        builder: (context, AsyncSnapshot<User> snapshot){
-          if (! snapshot.hasData) {
-            return const CircularProgressIndicator();
-          }
-          var user = snapshot.data!;
-          return ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: CircleAvatar(
-                  radius: 115,
-                  backgroundColor: Colors.purple.shade400,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.network(
-                     user.picture ?? 'https://via.placeholder.com/150',
-                      height: 210,
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    '${user.firstName} ${user.lastName} ',
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Divider(
-                  thickness: 3,
-                  color: Colors.purple.shade400,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(top: 8,left: 8,bottom: 8),
-                margin: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.purple.shade400),
-                    borderRadius: BorderRadius.circular(16)),
-                child: Column(
-                  children: [
-                    if (user.location != null && user.location!.city != null)
-                    Row(
-                      children:  [
-                        const Icon(Icons.place),
-                        const SizedBox(width: 5,),
-                        Text(user.location!.city!)
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    if (user.email != null)
-                      Row(
-                        children:  [
-                          const Icon(Icons.email),
-                          const SizedBox(width: 5,),
-                          Text(user.email!)
-                        ],
-                      ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    if (user.gender != null)
-                      Row(
-                        children:  [
-                          Icon(user.gender == 'male' ? Icons.male : Icons.female),
-                          const SizedBox(width: 5,),
-                          Text(user.gender!)
-                        ],
-                      ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    if (user.phone != null)
-                      Row(
-                        children:  [
-                          const Icon(Icons.phone),
-                          const SizedBox(width: 5,),
-                          Text(user.phone!)
-                        ],
-                      ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          );
-        },
+      body: ListView(
+
+        children: [
+          FutureBuilder(
+            future: _futureUser,
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data is User) {
+                return IntestazioneProfilo(user);
+              }
+              if (snapshot.hasError) {
+                return Center(
+                    child: Text(
+                  "Errore nel caricamento: ${snapshot.error}",
+                  style: const TextStyle(fontSize: 24),
+                ));
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: FutureBuilder(
+                future: _futurePost,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.data is List<Post>) {
+                    final _listPost = snapshot.data as List<Post>;
+                    return ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: _listPost.length + (_hasMorePost ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          if (index == _listPost.length) {
+                            _futurePost = _fetchPost();
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: PostCard(_listPost[index]),
+                          );
+                        });
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
+          ),
+        ],
       ),
     );
   }

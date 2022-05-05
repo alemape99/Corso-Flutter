@@ -20,7 +20,7 @@ class ApiUser {
   }
 
 
-  static Future<User> getDeatilsFor(String id ) async {
+  static Future<User> getDeatilsFor(String id) async {
     final response = await http.get(Uri.parse('$baseUrl/user/$id'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11'});
 
