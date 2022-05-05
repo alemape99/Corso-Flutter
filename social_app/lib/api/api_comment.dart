@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/models/comment.dart';
 import 'package:social_app/models/comment_response.dart';
 
@@ -48,6 +47,8 @@ class ApiComment {
         '${response.body} ');
   }
 
+  /* modo manuale
+
   static Future<Comment> addCommentTo(String postId, String message) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     String? userId = sp.getString('loggedUserId');
@@ -74,5 +75,38 @@ class ApiComment {
     }
     throw Exception('Commento non inserito:'
     '${response.body} ');
+  }*/
+
+  static Future<Comment> addCommentTo(Comment comment) async {
+
+    Map<String, dynamic> _jsonComment = comment.toJson();
+    _jsonComment.removeWhere((key, value) => value == null);
+
+    final response = await http.post(Uri.parse('$baseUrl/comment/create'),
+      headers: {
+        'app-id': '626fc92ee000f64b3bf05f11',
+        'Content-Type': 'application/json'
+      },
+      body:
+      jsonEncode({
+        _jsonComment
+      }),
+    );
+    if(response.statusCode == 200){
+      return Comment.fromJson(jsonDecode(response.body));
+    }
+    throw Exception('Commento non inserito:'
+        '${response.body} ');
+  }
+  static Future<Comment> deleteComment(String id) async {
+    final response = await http.delete(Uri.parse('$baseUrl/comment/$id'),
+        headers: {'app-id': '626fc92ee000f64b3bf05f11'});
+
+
+    if (response.statusCode == 200) {
+      return Comment.fromJson(jsonDecode(response.body));
+    }
+    throw Exception('Impossibile rimuovere commento:'
+        '${response.body} ');
   }
 }

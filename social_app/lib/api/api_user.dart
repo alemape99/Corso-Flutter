@@ -31,4 +31,65 @@ class ApiUser {
     throw Exception('Errore in ricevere gli utenti:'
         '${response.body} ');
   }
+
+  static Future<User> addUser(User user) async {
+
+    Map<String, dynamic> _jsonUser = user.toJson();
+    _jsonUser.removeWhere((key, value) => value == null);
+
+    final response = await http.post(Uri.parse('$baseUrl/user/create'),
+      headers: {
+        'app-id': '626fc92ee000f64b3bf05f11',
+        'Content-Type': 'application/json'
+      },
+      body:
+      jsonEncode({
+        _jsonUser
+      }),
+    );
+    if(response.statusCode == 200){
+      return User.fromJson(jsonDecode(response.body));
+    }
+    throw Exception('User non inserito:'
+        '${response.body} ');
+  }
+
+  static Future<User> modifiyUser(User user) async {
+    if(user.id == null){
+      throw Exception('Impossibile modificare utente');
+    }
+    Map<String, dynamic> _jsonUser = user.toJson();
+    _jsonUser.removeWhere((key, value) => value == null);
+
+    final response = await http.put(Uri.parse('$baseUrl/user/${user.id}'),
+      headers: {
+        'app-id': '626fc92ee000f64b3bf05f11',
+        'Content-Type': 'application/json'
+      },
+      body:
+      jsonEncode({
+        _jsonUser
+      }),
+    );
+    if(response.statusCode == 200){
+      return User.fromJson(jsonDecode(response.body));
+    }
+    throw Exception('User non modificato:'
+        '${response.body} ');
+  }
+
+  static Future<User> deleteUser(String id) async {
+    final response = await http.delete(Uri.parse('$baseUrl/user/$id'),
+        headers: {'app-id': '626fc92ee000f64b3bf05f11'});
+
+
+    if (response.statusCode == 200) {
+      return User.fromJson(jsonDecode(response.body));
+    }
+    throw Exception('Impossibile rimuovere utente:'
+        '${response.body} ');
+  }
+
+
+
 }

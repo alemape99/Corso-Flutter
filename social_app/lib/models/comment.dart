@@ -5,7 +5,7 @@ part 'comment.g.dart';
 
 @JsonSerializable()
 class Comment{
-  final String id;
+  final String? id;
   final String message;
   final User owner;
   final String post;
