@@ -23,7 +23,9 @@ class CommentWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('${comment.owner.firstName} ${comment.owner.lastName}: ', style: const TextStyle(fontWeight: FontWeight.bold),),
+                    Text('${comment.owner.firstName} ${comment.owner.lastName}: ',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     if (comment.publishDate != null)
                     Text('(${DateFormat("d/M/y HH:mm")
                         .format(DateTime.parse(comment.publishDate))})', style: const TextStyle(fontSize: 12),

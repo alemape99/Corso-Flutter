@@ -31,7 +31,7 @@ class PostCard extends StatelessWidget {
                       ),
                     ),
                   );
-                    },
+                  },
                   child: CircleAvatar(
                     radius: 23,
                     backgroundImage: NetworkImage(
@@ -83,7 +83,7 @@ class PostCard extends StatelessWidget {
               Wrap(
                 spacing: 6,
                 children:
-                    post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
+                post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
               ),
             const Divider(
               thickness: 2,
@@ -108,24 +108,24 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 if (showCommentButton == true)
-                TextButton(
-                  onPressed: () => Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => DetailsPost(post: post,)
+                  TextButton(
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => DetailsPost(post: post,)
+                    ),
+                    ),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.mode_comment_outlined),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text('Comment'),
+                      ],
+                    ),
+                    style: TextButton.styleFrom(
+                      primary: Colors.black,
                     ),
                   ),
-                  child: Row(
-                    children: const [
-                      Icon(Icons.mode_comment_outlined),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Text('Comment'),
-                    ],
-                  ),
-                  style: TextButton.styleFrom(
-                    primary: Colors.black,
-                  ),
-                ),
                 TextButton(
                   onPressed: () => print('Share'),
                   child: Row(

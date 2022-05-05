@@ -66,6 +66,7 @@ class _CommentiPostState extends State<CommentiPost> {
             else {
                 return ListView.builder(
                     shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
                     itemCount: comments.length,
                     itemBuilder: (context, index) {
                       if (index == _listaComment.length) {
