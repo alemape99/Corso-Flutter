@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:social_app/models/user.dart';
 
 part 'comment.g.dart';
 
@@ -6,7 +7,7 @@ part 'comment.g.dart';
 class Comment{
   final String id;
   final String message;
-  final String owner;
+  final User owner;
   final String post;
   final String publishDate;
 

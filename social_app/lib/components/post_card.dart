@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:social_app/models/post.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/pages/details_post.dart';
@@ -7,7 +6,8 @@ import 'package:social_app/pages/profile_page.dart';
 
 class PostCard extends StatelessWidget {
   final Post post;
-  const PostCard(this.post, {Key? key}) : super(key: key);
+  final bool showCommentButton;
+  const PostCard(this.post,{this.showCommentButton = true, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +107,7 @@ class PostCard extends StatelessWidget {
                     primary: Colors.black,
                   ),
                 ),
+                if (showCommentButton == true)
                 TextButton(
                   onPressed: () => Navigator.push(context, MaterialPageRoute(
                       builder: (context) => DetailsPost(post: post,)

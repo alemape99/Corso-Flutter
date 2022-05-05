@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/components/commenti_post.dart';
+import 'package:social_app/components/post_card.dart';
 import 'package:social_app/models/post.dart';
 
 class DetailsPost extends StatelessWidget {
@@ -11,7 +13,18 @@ class DetailsPost extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Comments'),
       ),
-      body: SafeArea(child: Text('Commenti')),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          children: [
+            PostCard(post, showCommentButton: false,),
+            if (post.id  != null)
+              CommentiPost(id:post.id!)
+          ],
+        ),
+      ),
     );
   }
 }

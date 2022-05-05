@@ -18,22 +18,22 @@ class ApiComment {
     throw Exception('Errore in ricevere gli utenti:'
         '${response.body} ');
   }
-  static Future<Comment> getCommentsFromPost(String id ) async {
+  static Future<CommentResponse> getCommentsFromPost(String id ) async {
     final response = await http.get(Uri.parse('$baseUrl/post/$id/comment'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11',});
 
     if (response.statusCode == 200) {
-      return Comment.fromJson(jsonDecode(response.body));
+      return CommentResponse.fromJson(jsonDecode(response.body));
     }
     throw Exception('Errore in ricevere gli utenti:'
         '${response.body} ');
   }
-  static Future<Comment> getCommentsFromUsers(String id ) async {
+  static Future<CommentResponse> getCommentsFromUsers(String id) async {
     final response = await http.get(Uri.parse('$baseUrl/user/$id/comment'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11',});
 
     if (response.statusCode == 200) {
-      return Comment.fromJson(jsonDecode(response.body));
+      return CommentResponse.fromJson(jsonDecode(response.body));
     }
     throw Exception('Errore in ricevere gli utenti:'
         '${response.body} ');
