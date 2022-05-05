@@ -17,7 +17,7 @@ class ApiComment {
     if (response.statusCode == 200) {
       return CommentResponse.fromJson(jsonDecode(response.body));
     }
-    throw Exception('Errore in ricevere gli utenti:'
+    throw Exception('Errore in ricevere il commento:'
         '${response.body} ');
   }
 
@@ -30,7 +30,7 @@ class ApiComment {
     if (response.statusCode == 200) {
       return CommentResponse.fromJson(jsonDecode(response.body));
     }
-    throw Exception('Errore in ricevere gli utenti:'
+    throw Exception('Errore in ricevere il commento:'
         '${response.body} ');
   }
 
@@ -43,7 +43,7 @@ class ApiComment {
     if (response.statusCode == 200) {
       return CommentResponse.fromJson(jsonDecode(response.body));
     }
-    throw Exception('Errore in ricevere gli utenti:'
+    throw Exception('Errore in ricevere il commento:'
         '${response.body} ');
   }
 

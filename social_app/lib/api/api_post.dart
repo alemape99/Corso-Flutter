@@ -19,7 +19,7 @@ class ApiPost{
       );
     }
     throw Exception(
-        'Errore in ricevere gli utenti:'
+        'Errore in ricevere il post:'
             '${response.body} ');
   }
   static Future<Post> getDeatilsFor(String id ) async {
@@ -29,7 +29,7 @@ class ApiPost{
     if (response.statusCode == 200) {
       return Post.fromJson(jsonDecode(response.body));
     }
-    throw Exception('Errore in ricevere gli utenti:'
+    throw Exception('Errore in ricevere il post:'
         '${response.body} ');
   }
   static Future<PostResponse> getDeatilsForUser(String id , {int page = 0, int limit = 20}) async {
@@ -39,7 +39,7 @@ class ApiPost{
     if (response.statusCode == 200) {
       return PostResponse.fromJson(jsonDecode(response.body));
     }
-    throw Exception('Errore in ricevere gli utenti:'
+    throw Exception('Errore in ricevere il post :'
         '${response.body} ');
   }
   static Future<Post> addPost(Post post) async {
