@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/components/app_drawer.dart';
+import 'package:social_app/components/barra_inferiore.dart';
 import 'package:social_app/components/bottone_profilo.dart';
 import 'package:social_app/components/contenuto_post.dart';
+import 'package:social_app/components/bottone_add_post.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -46,6 +48,9 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: const BottoneAddPost(),
+      bottomNavigationBar: const  BarraInferiore(),
     );
   }
 }

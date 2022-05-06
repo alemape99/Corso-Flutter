@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/models/post.dart';
 import 'package:social_app/models/post_response.dart';
 
@@ -45,17 +46,24 @@ class ApiPost {
         '${response.body} ');
   }
 
+
   static Future<Post> addPost(Post post) async {
     Map<String, dynamic> _jsonPost = post.toJson();
     _jsonPost.removeWhere((key, value) => value == null);
 
-    final response = await http.post(
-      Uri.parse('$baseUrl/post/create'),
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    final _idUser= sp.getString('loggedUserId');
+    if ( _idUser == null) {throw Exception('Utente non loggato');}
+    else {
+      _jsonPost['owner'] = _idUser;
+    }
+
+    final response = await http.post(Uri.parse('$baseUrl/post/create'),
       headers: {
         'app-id': '626fc92ee000f64b3bf05f11',
         'Content-Type': 'application/json'
       },
-      body: jsonEncode({_jsonPost}),
+      body: jsonEncode(_jsonPost),
     );
     if (response.statusCode == 200) {
       return Post.fromJson(jsonDecode(response.body));

@@ -90,7 +90,6 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                               Navigator.of(context).pop(); //oppure Alert Dialog
                             }
                             final response = await ApiComment.addCommentTo(_idPost!, _message!);
-                            print(response.id);
                             _textEditingController.clear();
                             Navigator.of(context).pop(true);
                           }

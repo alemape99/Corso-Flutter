@@ -20,7 +20,7 @@ class BottoneProfilo extends StatelessWidget {
           ),
         );
       },
-      icon: const Icon(Icons.person),
+      icon: const Icon(Icons.person, color: Colors.purple,),
     );
   }
 }

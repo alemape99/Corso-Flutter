@@ -38,7 +38,7 @@ class PostCard extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 23,
                     backgroundImage: NetworkImage(
-                      post.owner!.picture! ?? '',
+                      post.owner!.picture!,
                     ),
                   ),
                 ),
