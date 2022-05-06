@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:social_app/components/bottone_add_commenti.dart';
 import 'package:social_app/models/post.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/pages/details_post.dart';
@@ -8,9 +7,8 @@ import 'package:social_app/pages/profile_page.dart';
 class PostCard extends StatelessWidget {
   final Post post;
   final bool showCommentButton;
-  final bool showAddCommentButton;
 
-  const PostCard(this.post, {this.showCommentButton = true, this.showAddCommentButton = false, Key? key})
+  const PostCard(this.post, {this.showCommentButton = true, Key? key})
       : super(key: key);
 
   @override

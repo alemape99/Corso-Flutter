@@ -39,7 +39,7 @@ class _DetailsPostState extends State<DetailsPost> {
           shrinkWrap: true,
           physics: const ClampingScrollPhysics(),
           children: [
-            PostCard(widget.post, showCommentButton: false, showAddCommentButton: true,),
+            PostCard(widget.post, showCommentButton: false),
             if (widget.post.id  != null)
               CommentiPost(id:widget.post.id!)
           ],
