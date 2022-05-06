@@ -20,6 +20,7 @@ class CommentWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CircleAvatar(
                     backgroundImage: NetworkImage(comment.owner.picture!),
@@ -30,9 +31,6 @@ class CommentWidget extends StatelessWidget {
                   Text(
                     '${comment.owner.firstName} ${comment.owner.lastName}: ',
                     style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    width: 125,
                   ),
                   if (comment.publishDate != null)
                     Text(
