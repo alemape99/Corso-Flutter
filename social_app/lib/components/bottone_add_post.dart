@@ -3,7 +3,8 @@ import 'package:social_app/api/api_post.dart';
 import 'package:social_app/models/post.dart';
 
 class BottoneAddPost extends StatefulWidget {
-  const BottoneAddPost({Key? key}) : super(key: key);
+  final Function? callback;
+  const BottoneAddPost(this.callback,{Key? key}) : super(key: key);
 
   @override
   State<BottoneAddPost> createState() => _BottoneAddPostState();
@@ -93,7 +94,7 @@ class _BottoneAddPostState extends State<BottoneAddPost> {
                               await ApiPost.addPost(_post);
                               _textController.clear();
                               _tagController.clear();
-                              Navigator.of(context).pop();
+                              Navigator.of(context).pop(true);
                             },
                         ),
                       ],
@@ -101,8 +102,10 @@ class _BottoneAddPostState extends State<BottoneAddPost> {
                   ],
                 ),
               );
-
             });
+        if (create == true) {
+          widget.callback!();
+        }
       },
       child: const Icon(Icons.add),
       elevation: 2.0,

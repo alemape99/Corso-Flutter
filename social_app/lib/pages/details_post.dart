@@ -15,6 +15,7 @@ class DetailsPost extends StatefulWidget {
 
 class _DetailsPostState extends State<DetailsPost> {
   late UniqueKey _key;
+
   void refreshKey(){
     setState(() {
       _key = UniqueKey();
@@ -26,6 +27,7 @@ class _DetailsPostState extends State<DetailsPost> {
     _key = UniqueKey();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

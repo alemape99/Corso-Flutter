@@ -13,9 +13,25 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late UniqueKey _key;
+
+  void refreshKey(){
+    setState(() {
+      _key = UniqueKey();
+    });
+  }
+
+  @override
+  void initState() {
+    _key = UniqueKey();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.purple
@@ -49,7 +65,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: const BottoneAddPost(),
+      floatingActionButton: BottoneAddPost(refreshKey),
       bottomNavigationBar: const  BarraInferiore(),
     );
   }
