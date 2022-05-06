@@ -39,8 +39,8 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      child: const Icon(Icons.add),
+    return FloatingActionButton.extended(
+      label: const Text('Add Comment'),
       onPressed: () async {
         var popResult = await showModalBottomSheet(
             isScrollControlled: true,
@@ -59,9 +59,7 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                     const Text('Inserisci il tuo commento',),
                     TextField(
                       decoration: const InputDecoration(
-                        labelStyle: TextStyle(
-                          color: Colors.purple
-                        )
+                        hintText: 'Scrivi qui il tuo commento',
                       ),
                       controller: _textEditingController,
                       maxLines: 4,

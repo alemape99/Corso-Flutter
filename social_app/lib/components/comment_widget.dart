@@ -11,29 +11,41 @@ class CommentWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Container(
-          decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.purple)
-          ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.purple)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('${comment.owner.firstName} ${comment.owner.lastName}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(comment.owner.picture!),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    '${comment.owner.firstName} ${comment.owner.lastName}: ',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 125,
+                  ),
+                  if (comment.publishDate != null)
+                    Text(
+                      '(${DateFormat("d/M/y HH:mm").format(DateTime.parse(comment.publishDate!))})',
+                      style: const TextStyle(fontSize: 12),
                     ),
-                    if (comment.publishDate != null)
-                    Text('(${DateFormat("d/M/y HH:mm")
-                        .format(DateTime.parse(comment.publishDate!))})', style: const TextStyle(fontSize: 12),
-                      ),
-                  ],
-                ),
-                Text(comment.message, style: const TextStyle(fontSize: 15),),
-              ],
+                ],
+              ),
+              Text(
+                comment.message,
+                style: const TextStyle(fontSize: 15),
+              ),
+            ],
           ),
         ),
       ),

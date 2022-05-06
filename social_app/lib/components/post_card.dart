@@ -7,6 +7,7 @@ import 'package:social_app/pages/profile_page.dart';
 class PostCard extends StatelessWidget {
   final Post post;
   final bool showCommentButton;
+
   const PostCard(this.post,{this.showCommentButton = true, Key? key}) : super(key: key);
 
   @override
