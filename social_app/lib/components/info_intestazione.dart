@@ -9,11 +9,16 @@ class InfoIntestazione extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Row(
       children: [
-         Icon(icon, color: Colors.purple,),
+         Icon(
+           icon,
+           color: Colors.purple,
+         ),
         const SizedBox(
           width: 5,
         ),
-        Text(testo)
+        Text(
+            testo
+        ),
       ],
     );
   }

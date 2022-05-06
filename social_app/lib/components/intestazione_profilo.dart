@@ -31,12 +31,17 @@ class IntestazioneProfilo extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               '${user.firstName} ${user.lastName}',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           ),
         ),
         const Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 8.0),
+          padding:  EdgeInsets.symmetric(
+              horizontal: 8.0
+          ),
           child: Divider(
             thickness: 3,
             color: Colors.purple,
@@ -47,44 +52,68 @@ class IntestazioneProfilo extends StatelessWidget {
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               border: Border.all(color: Colors.purple),
-              borderRadius: BorderRadius.circular(16)),
+              borderRadius: BorderRadius.circular(16)
+          ),
           child: Column(
             children: [
               if (user.dateOfBirth != null)
                 Row(
                   children: [
-                    const Icon(Icons.date_range, color: Colors.purple,),
+                    const Icon(
+                      Icons.date_range,
+                      color: Colors.purple,
+                    ),
                     const SizedBox(
                       width: 5,
                     ),
-                    Text(DateFormat('d/M/y').format(DateTime.parse(user.dateOfBirth!)))
+                    Text(
+                        DateFormat('d/M/y').format(
+                            DateTime.parse(user.dateOfBirth!),
+                        ),
+                    ),
                   ],
                 ),
               if (user.location != null && user.location!.city != null)
-                InfoIntestazione(icon: Icons.place, testo: user.location!.city!),
+                InfoIntestazione(
+                    icon: Icons.place,
+                    testo: user.location!.city!,
+                ),
               const SizedBox(
                 height: 5,
               ),
               if (user.email != null)
-                InfoIntestazione(icon: Icons.email, testo: user.email!),
+                InfoIntestazione(
+                    icon: Icons.email,
+                    testo: user.email!,
+                ),
               const SizedBox(
                 height: 5,
               ),
               if (user.gender != null)
                 Row(
                   children: [
-                    Icon(user.gender == 'male' ? (Icons.male) : (Icons.female), color: Colors.purple,),
+                    Icon(
+                      user.gender == 'male'
+                          ? (Icons.male)
+                          : (Icons.female),
+                      color: Colors.purple,
+                    ),
                     const SizedBox(
                       width: 5,
                     ),
-                    Text(user.gender!)
+                    Text(
+                        user.gender!
+                    ),
                   ],
                 ),
               const SizedBox(
                 height: 5,
               ),
               if (user.phone != null)
-                InfoIntestazione(icon: Icons.phone, testo:  user.phone!),
+                InfoIntestazione(
+                    icon: Icons.phone,
+                    testo:  user.phone!,
+                ),
               const SizedBox(
                 height: 5,
               ),
@@ -92,10 +121,15 @@ class IntestazioneProfilo extends StatelessWidget {
           ),
         ),
         const Padding(
-          padding: EdgeInsets.only(left: 8, top: 8),
+          padding: EdgeInsets.only(
+              left: 8, top: 8
+          ),
           child: Text(
             'Posts',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],

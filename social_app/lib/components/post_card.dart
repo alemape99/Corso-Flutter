@@ -71,7 +71,10 @@ class PostCard extends StatelessWidget {
                 ),
               ],
             ),
-            Text(post.text ?? ''),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(post.text ?? ''),
+            ),
             const SizedBox(
               height: 5,
             ),

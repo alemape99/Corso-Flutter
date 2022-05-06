@@ -28,19 +28,30 @@ class LoginCard extends StatelessWidget {
             width: 180,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(user.picture!),
+                  image: NetworkImage(
+                      user.picture!,
+                  ),
                   scale: 0.65,
                 ),
-                borderRadius: BorderRadius.circular(32)),
+                borderRadius: BorderRadius.circular(32),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(user.firstName,
-                    style: const TextStyle(fontSize: 20, color: Colors.white)),
+                    style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                    ),
+                ),
                 const SizedBox(width: 5),
                 Text(user.lastName,
-                    style: const TextStyle(fontSize: 20, color: Colors.white)),
+                    style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                    ),
+                ),
               ],
             ),
           ),

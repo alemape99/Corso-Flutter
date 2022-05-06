@@ -23,25 +23,33 @@ class CommentWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(comment.owner.picture!),
+                    backgroundImage: NetworkImage(
+                        comment.owner.picture!
+                    ),
                   ),
                   const SizedBox(
                     width: 5,
                   ),
                   Text(
                     '${comment.owner.firstName} ${comment.owner.lastName}: ',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                    ),
                   ),
                   if (comment.publishDate != null)
                     Text(
                       '(${DateFormat("d/M/y HH:mm").format(DateTime.parse(comment.publishDate!))})',
-                      style: const TextStyle(fontSize: 12),
+                      style: const TextStyle
+                        (fontSize: 12
+                      ),
                     ),
                 ],
               ),
               Text(
                 comment.message,
-                style: const TextStyle(fontSize: 15),
+                style: const TextStyle(
+                    fontSize: 15
+                ),
               ),
             ],
           ),

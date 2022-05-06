@@ -59,7 +59,9 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Profile'),
+        title: const Text(
+          'Profile',
+        ),
       ),
       body: ListView(
         children: [
@@ -74,9 +76,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Text(
                   "Errore nel caricamento: ${snapshot.error}",
                   style: const TextStyle(fontSize: 24),
-                ));
+                ),
+                );
               }
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child: CircularProgressIndicator()
+              );
             },
           ),
           Padding(
@@ -106,7 +111,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                   if (snapshot.hasError) {
                     return Center(
-                      child: Text(snapshot.error.toString()),
+                      child: Text(
+                        snapshot.error.toString(),
+                      ),
                     );
                   }
                   return const Center(

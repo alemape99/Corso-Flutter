@@ -40,7 +40,9 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-      label: const Text('Add Comment'),
+      label: const Text(
+          'Add Comment'
+      ),
       onPressed: () async {
         var popResult = await showModalBottomSheet(
             isScrollControlled: true,
@@ -56,7 +58,9 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Inserisci il tuo commento',),
+                    const Text(
+                      'Inserisci il tuo commento',
+                    ),
                     TextField(
                       decoration: const InputDecoration(
                         hintText: 'Scrivi qui il tuo commento',
@@ -78,7 +82,9 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                           },
                         ),
                         TextButton(
-                          child: const Text('Pubblica'),
+                          child: const Text(
+                              'Pubblica'
+                          ),
                           onPressed: () async {
                             if (_message == null || _message!.isEmpty) {
                               Navigator.of(context).pop(); //oppure Alert Dialog

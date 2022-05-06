@@ -20,7 +20,9 @@ class _HomeState extends State<Home> {
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Image.asset('assets/icona.png'),
+        title: Image.asset(
+            'assets/icona.png'
+        ),
         actions: const [
           BottoneProfilo(),
         ],
@@ -28,7 +30,9 @@ class _HomeState extends State<Home> {
       drawer: const AppDrawer(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(
+              horizontal: 8.0
+          ),
           child: Column(
             children: const [
               Divider(

@@ -31,7 +31,9 @@ class _DetailsPostState extends State<DetailsPost> {
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        title: const Text('Comments'),
+        title: const Text(
+            'Comments'
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
