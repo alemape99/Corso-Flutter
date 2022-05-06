@@ -98,13 +98,13 @@ class ApiComment {
     throw Exception('Commento non inserito:'
         '${response.body} ');
   }
-  static Future<Comment> deleteComment(String id) async {
+  static Future<bool> deleteComment(String id) async {
     final response = await http.delete(Uri.parse('$baseUrl/comment/$id'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11'});
 
 
     if (response.statusCode == 200) {
-      return Comment.fromJson(jsonDecode(response.body));
+      return true;
     }
     throw Exception('Impossibile rimuovere commento:'
         '${response.body} ');

@@ -78,13 +78,13 @@ class ApiUser {
         '${response.body} ');
   }
 
-  static Future<User> deleteUser(String id) async {
+  static Future<bool> deleteUser(String id) async {
     final response = await http.delete(Uri.parse('$baseUrl/user/$id'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11'});
 
 
     if (response.statusCode == 200) {
-      return User.fromJson(jsonDecode(response.body));
+      return true;
     }
     throw Exception('Impossibile rimuovere utente:'
         '${response.body} ');
