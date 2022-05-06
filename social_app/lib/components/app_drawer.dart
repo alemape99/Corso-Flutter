@@ -29,12 +29,12 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.home),
+              leading: const Icon(Icons.home, color: Colors.purple,),
               title: const Text('Home'),
               onTap: () => Navigator.of(context).popAndPushNamed('/home'),
             ),
             ListTile(
-              leading: const Icon(Icons.person),
+              leading: const Icon(Icons.person, color: Colors.purple,),
               title: const Text('Profile'),
               onTap: () async {
                 SharedPreferences sp = await SharedPreferences.getInstance();
@@ -53,7 +53,7 @@ class AppDrawer extends StatelessWidget {
               height: 440,
             ),
             ListTile(
-              leading: const Icon(Icons.logout),
+              leading: const Icon(Icons.logout, color: Colors.purple,),
               title: const Text('Logout'),
               onTap: () async {
                 SharedPreferences sp = await SharedPreferences.getInstance();

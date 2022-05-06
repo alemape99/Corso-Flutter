@@ -5,7 +5,8 @@ import 'package:social_app/models/post.dart';
 
 class BottoneAddCommenti extends StatefulWidget {
   final Post post;
-  const BottoneAddCommenti(this.post, {Key? key}) : super(key: key);
+  final Function callback;
+  const BottoneAddCommenti(this.post,this.callback ,{Key? key}) : super(key: key);
 
   @override
   State<BottoneAddCommenti> createState() => _BottoneAddCommentiState();
@@ -40,8 +41,8 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       child: const Icon(Icons.add),
-      onPressed: () {
-        showModalBottomSheet(
+      onPressed: () async {
+        var popResult = await showModalBottomSheet(
             isScrollControlled: true,
             context: context,
             builder: (context) {
@@ -55,10 +56,15 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Inserisci il tuo commento'),
+                    const Text('Inserisci il tuo commento',),
                     TextField(
+                      decoration: const InputDecoration(
+                        labelStyle: TextStyle(
+                          color: Colors.purple
+                        )
+                      ),
                       controller: _textEditingController,
-                      maxLines: 5,
+                      maxLines: 4,
                       onChanged: (value) {
                         _message = _textEditingController.text;
                       },
@@ -69,6 +75,7 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                           child: const Text('Annulla'),
                           onPressed: () {
                             _message = null;
+                            _textEditingController.clear();
                             Navigator.of(context).pop();
                           },
                         ),
@@ -80,7 +87,8 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                             }
                             final response = await ApiComment.addCommentTo(_idPost!, _message!);
                             print(response.id);
-                            Navigator.of(context).pop();
+                            _textEditingController.clear();
+                            Navigator.of(context).pop(true);
                           }
                         ),
                       ],
@@ -89,6 +97,9 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                 ),
               );
             });
+        if (popResult == true) {
+          widget.callback();
+        }
       },
     );
   }

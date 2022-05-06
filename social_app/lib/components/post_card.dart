@@ -96,7 +96,7 @@ class PostCard extends StatelessWidget {
                   onPressed: () => print('Likes'),
                   child: Row(
                     children: [
-                      const Icon(Icons.thumb_up),
+                      const Icon(Icons.thumb_up, color: Colors.purple,),
                       const SizedBox(
                         width: 4,
                       ),
@@ -115,7 +115,7 @@ class PostCard extends StatelessWidget {
                     ),
                     child: Row(
                       children: const [
-                        Icon(Icons.mode_comment_outlined),
+                        Icon(Icons.mode_comment_outlined, color: Colors.purple,),
                         SizedBox(
                           width: 4,
                         ),
@@ -130,7 +130,7 @@ class PostCard extends StatelessWidget {
                   onPressed: () => print('Share'),
                   child: Row(
                     children: const [
-                      Icon(Icons.share_outlined),
+                      Icon(Icons.share_outlined, color: Colors.purple,),
                       SizedBox(
                         width: 4,
                       ),

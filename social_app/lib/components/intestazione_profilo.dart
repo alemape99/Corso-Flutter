@@ -53,7 +53,7 @@ class IntestazioneProfilo extends StatelessWidget {
               if (user.dateOfBirth != null)
                 Row(
                   children: [
-                    const Icon(Icons.date_range),
+                    const Icon(Icons.date_range, color: Colors.purple,),
                     const SizedBox(
                       width: 5,
                     ),
@@ -73,7 +73,7 @@ class IntestazioneProfilo extends StatelessWidget {
               if (user.gender != null)
                 Row(
                   children: [
-                    Icon(user.gender == 'male' ? Icons.male : Icons.female),
+                    Icon(user.gender == 'male' ? (Icons.male) : (Icons.female), color: Colors.purple,),
                     const SizedBox(
                       width: 5,
                     ),
