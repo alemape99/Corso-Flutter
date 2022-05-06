@@ -30,7 +30,7 @@ class PostCard extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProfilePage(
-                          id: post.owner.id!,
+                          id: post.owner!.id!,
                         ),
                       ),
                     );
@@ -38,7 +38,7 @@ class PostCard extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 23,
                     backgroundImage: NetworkImage(
-                      post.owner.picture ?? '',
+                      post.owner!.picture! ?? '',
                     ),
                   ),
                 ),
@@ -49,7 +49,7 @@ class PostCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${post.owner.firstName} ${post.owner.lastName}',
+                      '${post.owner!.firstName} ${post.owner!.lastName}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
