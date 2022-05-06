@@ -5,7 +5,7 @@ import 'package:social_app/models/post.dart';
 
 class BottoneAddCommenti extends StatefulWidget {
   final Post post;
-  final Function callback;
+  final Function? callback;
   const BottoneAddCommenti(this.post,this.callback ,{Key? key}) : super(key: key);
 
   @override
@@ -96,7 +96,7 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
               );
             });
         if (popResult == true) {
-          widget.callback();
+          widget.callback!();
         }
       },
     );

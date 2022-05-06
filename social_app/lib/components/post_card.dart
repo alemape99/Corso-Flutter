@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/components/bottone_add_commenti.dart';
 import 'package:social_app/models/post.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/pages/details_post.dart';
@@ -7,8 +8,10 @@ import 'package:social_app/pages/profile_page.dart';
 class PostCard extends StatelessWidget {
   final Post post;
   final bool showCommentButton;
+  final bool showAddCommentButton;
 
-  const PostCard(this.post,{this.showCommentButton = true, Key? key}) : super(key: key);
+  const PostCard(this.post, {this.showCommentButton = true, this.showAddCommentButton = false, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +27,15 @@ class PostCard extends StatelessWidget {
             Row(
               children: [
                 GestureDetector(
-                  onTap: () {Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProfilePage(
-                        id: post.owner.id!,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(
+                          id: post.owner.id!,
+                        ),
                       ),
-                    ),
-                  );
+                    );
                   },
                   child: CircleAvatar(
                     radius: 23,
@@ -84,7 +88,7 @@ class PostCard extends StatelessWidget {
               Wrap(
                 spacing: 6,
                 children:
-                post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
+                    post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
               ),
             const Divider(
               thickness: 2,
@@ -97,7 +101,10 @@ class PostCard extends StatelessWidget {
                   onPressed: () => print('Likes'),
                   child: Row(
                     children: [
-                      const Icon(Icons.thumb_up, color: Colors.purple,),
+                      const Icon(
+                        Icons.thumb_up,
+                        color: Colors.purple,
+                      ),
                       const SizedBox(
                         width: 4,
                       ),
@@ -109,7 +116,7 @@ class PostCard extends StatelessWidget {
                   ),
                 ),
                 if (showCommentButton == true)
-                  TextButton(
+                    TextButton(
                     onPressed: () => Navigator.push(context, MaterialPageRoute(
                         builder: (context) => DetailsPost(post: post,)
                     ),
@@ -131,7 +138,10 @@ class PostCard extends StatelessWidget {
                   onPressed: () => print('Share'),
                   child: Row(
                     children: const [
-                      Icon(Icons.share_outlined, color: Colors.purple,),
+                      Icon(
+                        Icons.share_outlined,
+                        color: Colors.purple,
+                      ),
                       SizedBox(
                         width: 4,
                       ),
