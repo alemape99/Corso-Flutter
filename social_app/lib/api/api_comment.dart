@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/models/comment.dart';
 import 'package:social_app/models/comment_response.dart';
 
@@ -77,10 +78,14 @@ class ApiComment {
     '${response.body} ');
   }*/
 
-  static Future<Comment> addCommentTo(Comment comment) async {
+  static Future<Comment> addCommentTo(String postId, String comment) async {
 
-    Map<String, dynamic> _jsonComment = comment.toJson();
-    _jsonComment.removeWhere((key, value) => value == null);
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    String? userId = sp.getString('loggedUserId');
+
+    if(userId == null){
+      throw Exception('Impossibile inserire un commento, fai il login');
+    }
 
     final response = await http.post(Uri.parse('$baseUrl/comment/create'),
       headers: {
@@ -89,7 +94,9 @@ class ApiComment {
       },
       body:
       jsonEncode({
-        _jsonComment
+        'owner': userId,
+        'post': postId,
+        'message': comment,
       }),
     );
     if(response.statusCode == 200){

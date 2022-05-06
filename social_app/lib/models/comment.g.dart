@@ -11,7 +11,7 @@ Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
       message: json['message'] as String,
       owner: User.fromJson(json['owner'] as Map<String, dynamic>),
       post: json['post'] as String,
-      publishDate: json['publishDate'] as String,
+      publishDate: json['publishDate'] as String?,
     );
 
 Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{

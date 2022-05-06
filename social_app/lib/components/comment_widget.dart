@@ -28,7 +28,7 @@ class CommentWidget extends StatelessWidget {
                     ),
                     if (comment.publishDate != null)
                     Text('(${DateFormat("d/M/y HH:mm")
-                        .format(DateTime.parse(comment.publishDate))})', style: const TextStyle(fontSize: 12),
+                        .format(DateTime.parse(comment.publishDate!))})', style: const TextStyle(fontSize: 12),
                       ),
                   ],
                 ),

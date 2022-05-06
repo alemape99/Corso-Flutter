@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/components/bottone_add_commenti.dart';
 import 'package:social_app/components/commenti_post.dart';
 import 'package:social_app/components/post_card.dart';
 import 'package:social_app/models/post.dart';
@@ -25,6 +26,7 @@ class DetailsPost extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: BottoneAddCommenti(post),
     );
   }
 }

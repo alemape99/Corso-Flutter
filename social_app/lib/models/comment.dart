@@ -9,14 +9,14 @@ class Comment{
   final String message;
   final User owner;
   final String post;
-  final String publishDate;
+  final String? publishDate;
 
   Comment({
-    required this.id,
+    this.id,
     required this.message,
     required this.owner,
     required this.post,
-    required this.publishDate,
+    this.publishDate,
 });
   factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
 
