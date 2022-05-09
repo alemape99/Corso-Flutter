@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/components/bottone_aggiungi_modifica_post.dart';
+import 'package:social_app/components/like_button.dart';
 import 'package:social_app/models/post.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/pages/details_post.dart';
@@ -22,12 +23,14 @@ class PostCard extends StatefulWidget {
 class _PostCardState extends State<PostCard> {
   String? _userId;
 
+
   Future<void> _initIdUtente() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     setState(() {
       _userId = sp.getString('loggedUserId');
     });
   }
+
 
   @override
   void initState() {
@@ -129,24 +132,7 @@ class _PostCardState extends State<PostCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                TextButton(
-                  onPressed: () => print('Likes'),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.thumb_up,
-                        color: Colors.purple,
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text('Likes: ${(widget.post.likes).toString()}')
-                    ],
-                  ),
-                  style: TextButton.styleFrom(
-                    primary: Colors.black,
-                  ),
-                ),
+                LikeButton(widget.post, _userId),
                 if (widget.showCommentButton == true)
                   TextButton(
                     onPressed: () => Navigator.push(
