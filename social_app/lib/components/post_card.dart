@@ -34,7 +34,6 @@ class _PostCardState extends State<PostCard> {
 
   @override
   void initState() {
-    _userId;
     _initIdUtente();
     super.initState();
   }
@@ -132,7 +131,7 @@ class _PostCardState extends State<PostCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                LikeButton(widget.post, _userId),
+                if(_userId != null) LikeButton(widget.post, _userId),
                 if (widget.showCommentButton == true)
                   TextButton(
                     onPressed: () => Navigator.push(

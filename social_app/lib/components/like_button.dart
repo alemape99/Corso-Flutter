@@ -16,18 +16,13 @@ class LikeButton extends StatefulWidget {
 class _LikeButtonState extends State<LikeButton> {
   bool _conLike = false;
   late int _numLikes;
-  late List<String> _listaLike;
-  late SharedPreferences _sp;
 
 
   initLike() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     var listaLike = sp.getStringList('like_${widget.userIdLoggato}') ?? [];
-    print(listaLike);
     setState(() {
       _conLike = listaLike.contains(widget.post.id);
-      _listaLike = listaLike;
-      _sp = sp;
     });
   }
 
@@ -40,7 +35,6 @@ class _LikeButtonState extends State<LikeButton> {
         : listaLike.add(widget.post.id!);
 
     await sp.setStringList('like_${widget.userIdLoggato}', listaLike);
-    print(listaLike);
 
     _conLike
     ? _numLikes--
