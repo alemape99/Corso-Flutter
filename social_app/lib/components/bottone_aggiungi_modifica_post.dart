@@ -14,8 +14,8 @@ class BottoneAggiungiModificaPost extends StatefulWidget {
 }
 
 class _BottoneAggiungiModificaPostState extends State<BottoneAggiungiModificaPost> {
-  late String? _text;
-  late String _tag;
+
+
   late TextEditingController _controllerText;
   late TextEditingController _controllerTags;
 
@@ -66,9 +66,6 @@ class _BottoneAggiungiModificaPostState extends State<BottoneAggiungiModificaPos
             controller: _controllerTags,
           ) : TextField(
             controller: _controllerTags,
-            onChanged: (value){
-              _tag = _controllerTags.text;
-            },
             decoration:  const InputDecoration(
               hintText: 'Scrivi qui i tuoi hastags',
             ),
