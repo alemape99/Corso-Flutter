@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
             future: _futureUser,
             builder: (context, snapshot) {
               if (snapshot.hasData && snapshot.data is User) {
-                return IntestazioneProfilo(user);
+                return IntestazioneProfilo(user,);
               }
               if (snapshot.hasError) {
                 return Center(
