@@ -47,73 +47,58 @@ class _PostCardState extends State<PostCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfilePage(
-                          id: widget.post.owner!.id!,
-                        ),
+            GestureDetector(
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>
+                      ProfilePage(
+                        id: widget.post.owner!.id!,))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 24,
+                        backgroundImage: NetworkImage(widget.post.owner!.picture!,),
                       ),
-                    );
-                  },
-                  child: CircleAvatar(
-                    radius: 23,
-                    backgroundImage: NetworkImage(
-                      widget.post.owner!.picture!,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${widget.post.owner!.firstName} ${widget.post.owner!.lastName}',
+                      const SizedBox(width: 16),
+                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        Text('${widget.post.owner!.firstName} ${widget.post.owner!.lastName}',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextButton(
-                            child: const Text('Modifica'),
-                            onPressed: () async {
-                              var change = await showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  builder: (context) =>
-                                      BottoneAggiungiModificaPost(_userId!, post: widget.post)
-                              );
-
-                              if (change == true) {
-                                widget.callback();
-                              }
-                            }),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        if (widget.post.publishDate != null)
-                          Text(
-                            DateFormat("d/M/y HH:mm").format(
-                                DateTime.parse(widget.post.publishDate!)),
-                          ),
-                        const Icon(
-                          Icons.public,
-                          size: 15,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                          ),),
+                            Row(
+                              children: [
+                                if (widget.post.publishDate != null)
+                                  Text(
+                                    DateFormat("d/M/y HH:mm").format(
+                                        DateTime.parse(widget.post.publishDate!)),
+                                  ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Icon(Icons.public, color: Colors.purple, size: 15,)
+                              ],
+                            )
+                      ]),
+                    ],
+                  ),
+                  IconButton(
+                      icon: const Icon(Icons.more_horiz),
+                      onPressed: () async {
+                        var change = await showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (context) =>
+                                BottoneAggiungiModificaPost(_userId!, post: widget.post)
+                        );
+                        if (change == true) {
+                          widget.callback();
+                        }
+                      }),
+                ],
+              ),
             ),
             if (widget.post.text != null)
               Padding(
