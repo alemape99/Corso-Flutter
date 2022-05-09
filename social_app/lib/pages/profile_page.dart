@@ -41,16 +41,17 @@ class _ProfilePageState extends State<ProfilePage> {
     return _listaPostVisualizzate;
   }
 
-  @override
-  void initState() {
-    _futureUser = _fetchUser(widget.id);
-
+  void initVariables() {
     _listaPostVisualizzate = [];
     _hasMorePost = false;
     _skipPost = 0;
     _page = 0;
     _futurePost = _fetchPost();
-
+  }
+  @override
+  void initState() {
+    _futureUser = _fetchUser(widget.id);
+    initVariables();
     super.initState();
   }
 
@@ -105,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           }
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 8.0),
-                            child: PostCard(_listPost[index]),
+                            child: PostCard(_listPost[index], callback: initVariables,),
                           );
                         });
                   }

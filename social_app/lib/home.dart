@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_app/components/app_drawer.dart';
 import 'package:social_app/components/barra_inferiore.dart';
+import 'package:social_app/components/bottone_aggiungi_modifica_post.dart';
 import 'package:social_app/components/bottone_profilo.dart';
 import 'package:social_app/components/contenuto_post.dart';
-import 'package:social_app/components/bottone_add_post.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,9 +14,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String? _userId;
   late UniqueKey _key;
 
-  void refreshKey(){
+  initUserId() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    setState(() {
+      _userId = sp.getString('loggedUserId');
+    });
+    if (_userId == null) {
+      throw Exception('Utente non loggato');
+    }
+  }
+  void refreshKey() {
     setState(() {
       _key = UniqueKey();
     });
@@ -25,22 +36,18 @@ class _HomeState extends State<Home> {
   void initState() {
     _key = UniqueKey();
     super.initState();
+    initUserId();
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.purple
-        ),
+        iconTheme: const IconThemeData(color: Colors.purple),
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Image.asset(
-            'assets/icona.png'
-        ),
+        title: Image.asset('assets/icona.png'),
         actions: const [
           BottoneProfilo(),
         ],
@@ -48,9 +55,7 @@ class _HomeState extends State<Home> {
       drawer: const AppDrawer(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 8.0
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
             children: const [
               Divider(
@@ -65,8 +70,23 @@ class _HomeState extends State<Home> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: BottoneAddPost(refreshKey),
-      bottomNavigationBar: const  BarraInferiore(),
+      floatingActionButton: _userId != null
+          ? FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () async {
+                var edited = await showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) =>
+                        BottoneAggiungiModificaPost(_userId!));
+                if (edited == true) {
+                  setState(() {
+                    _key = UniqueKey();
+                  });
+                }
+              })
+          : null,
+      bottomNavigationBar: const BarraInferiore(),
     );
   }
 }

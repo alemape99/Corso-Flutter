@@ -105,6 +105,7 @@ class ApiComment {
     throw Exception('Commento non inserito:'
         '${response.body} ');
   }
+
   static Future<bool> deleteComment(String id) async {
     final response = await http.delete(Uri.parse('$baseUrl/comment/$id'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11'});

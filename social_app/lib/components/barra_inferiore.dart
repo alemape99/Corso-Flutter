@@ -14,7 +14,15 @@ class BarraInferiore extends StatelessWidget {
                 onPressed: () => print('test'),
                 icon: const Icon(Icons.home, color: Colors.purple,)
             ),
-           const BottoneProfilo()
+           const BottoneProfilo(),
+            IconButton(
+                onPressed: () => print('test'),
+                icon: Icon(Icons.search, color: Colors.purple,)
+            ),
+            IconButton(
+                onPressed: () => print('test'),
+                icon: Icon(Icons.post_add, color: Colors.purple,)
+            ),
           ]
       ),
     );

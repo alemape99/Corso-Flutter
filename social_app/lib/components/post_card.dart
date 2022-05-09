@@ -1,15 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:social_app/components/bottone_aggiungi_modifica_post.dart';
 import 'package:social_app/models/post.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/pages/details_post.dart';
 import 'package:social_app/pages/profile_page.dart';
 
-class PostCard extends StatelessWidget {
+class PostCard extends StatefulWidget {
   final Post post;
   final bool showCommentButton;
+  final VoidCallback callback;
 
-  const PostCard(this.post, {this.showCommentButton = true, Key? key})
+  const PostCard(this.post,
+      {this.showCommentButton = true, required this.callback, Key? key})
       : super(key: key);
+
+  @override
+  State<PostCard> createState() => _PostCardState();
+}
+
+class _PostCardState extends State<PostCard> {
+  String? _userId;
+
+  Future<void> _initIdUtente() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    setState(() {
+      _userId = sp.getString('loggedUserId');
+    });
+  }
+
+  @override
+  void initState() {
+    _userId;
+    _initIdUtente();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +55,7 @@ class PostCard extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProfilePage(
-                          id: post.owner!.id!,
+                          id: widget.post.owner!.id!,
                         ),
                       ),
                     );
@@ -38,7 +63,7 @@ class PostCard extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 23,
                     backgroundImage: NetworkImage(
-                      post.owner!.picture!,
+                      widget.post.owner!.picture!,
                     ),
                   ),
                 ),
@@ -48,18 +73,37 @@ class PostCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '${post.owner!.firstName} ${post.owner!.lastName}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${widget.post.owner!.firstName} ${widget.post.owner!.lastName}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextButton(
+                            child: const Text('Modifica'),
+                            onPressed: () async {
+                              var change = await showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (context) =>
+                                      BottoneAggiungiModificaPost(_userId!, post: widget.post)
+                              );
+
+                              if (change == true) {
+                                widget.callback();
+                              }
+                            }),
+                      ],
                     ),
                     Row(
                       children: [
-                        if (post.publishDate != null)
+                        if (widget.post.publishDate != null)
                           Text(
-                            DateFormat("d/M/y HH:mm")
-                                .format(DateTime.parse(post.publishDate!)),
+                            DateFormat("d/M/y HH:mm").format(
+                                DateTime.parse(widget.post.publishDate!)),
                           ),
                         const Icon(
                           Icons.public,
@@ -71,25 +115,27 @@ class PostCard extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(post.text ?? ''),
-            ),
+            if (widget.post.text != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(widget.post.text ?? ''),
+              ),
             const SizedBox(
               height: 5,
             ),
-            Image.network(
-              post.image ?? '',
-              width: MediaQuery.of(context).size.width - 30,
-            ),
+            if (widget.post.image != null && widget.post.image!.isNotEmpty)
+              Image.network(
+                widget.post.image!,
+              ),
             const SizedBox(
               height: 5,
             ),
-            if (post.tags != null)
+            if (widget.post.tags != null)
               Wrap(
                 spacing: 6,
-                children:
-                    post.tags!.map((tag) => Chip(label: Text(tag))).toList(),
+                children: widget.post.tags!
+                    .map((tag) => Chip(label: Text(tag)))
+                    .toList(),
               ),
             const Divider(
               thickness: 2,
@@ -109,22 +155,28 @@ class PostCard extends StatelessWidget {
                       const SizedBox(
                         width: 4,
                       ),
-                      Text('Likes: ${(post.likes).toString()}')
+                      Text('Likes: ${(widget.post.likes).toString()}')
                     ],
                   ),
                   style: TextButton.styleFrom(
                     primary: Colors.black,
                   ),
                 ),
-                if (showCommentButton == true)
-                    TextButton(
-                    onPressed: () => Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => DetailsPost(post: post,)
-                    ),
+                if (widget.showCommentButton == true)
+                  TextButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailsPost(
+                                post: widget.post,
+                              )),
                     ),
                     child: Row(
                       children: const [
-                        Icon(Icons.mode_comment_outlined, color: Colors.purple,),
+                        Icon(
+                          Icons.mode_comment_outlined,
+                          color: Colors.purple,
+                        ),
                         SizedBox(
                           width: 4,
                         ),

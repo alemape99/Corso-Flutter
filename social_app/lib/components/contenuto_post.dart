@@ -18,15 +18,7 @@ class _ContenutoPostState extends State<ContenutoPost> {
   late int _page;
   late Future<List<Post>> _future;
 
-  @override
-  void initState() {
-    super.initState();
-    _listaPostVisualizzate = [];
-    _hasMorePost = false;
-    _skipPost = 0;
-    _page = 0;
-    _future = _fetchPost();
-  }
+
 
   Future<List<Post>> _fetchPost() async {
     final PostResponse result = await ApiPost.getPostList(page: _page);
@@ -37,6 +29,20 @@ class _ContenutoPostState extends State<ContenutoPost> {
       _listaPostVisualizzate = _listaPostVisualizzate + result.data;
     });
     return _listaPostVisualizzate;
+  }
+
+  void initVariables(){
+    _listaPostVisualizzate = [];
+    _hasMorePost = false;
+    _skipPost = 0;
+    _page = 0;
+    _future = _fetchPost();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initVariables();
   }
 
   @override
@@ -68,7 +74,7 @@ class _ContenutoPostState extends State<ContenutoPost> {
                     }
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
-                      child: PostCard(_listPost[index]),
+                      child: PostCard(_listPost[index], callback: initVariables,),
                     );
                   });
             }

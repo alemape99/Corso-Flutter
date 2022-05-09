@@ -46,19 +46,20 @@ class ApiPost {
         '${response.body} ');
   }
 
-
-  static Future<Post> addPost(Post post) async {
+  static Future<Post> addPost(Post post, String userId) async {
     Map<String, dynamic> _jsonPost = post.toJson();
     _jsonPost.removeWhere((key, value) => value == null);
 
     SharedPreferences sp = await SharedPreferences.getInstance();
-    final _idUser= sp.getString('loggedUserId');
-    if ( _idUser == null) {throw Exception('Utente non loggato');}
-    else {
+    final _idUser = sp.getString('loggedUserId');
+    if (_idUser == null) {
+      throw Exception('Utente non loggato');
+    } else {
       _jsonPost['owner'] = _idUser;
     }
 
-    final response = await http.post(Uri.parse('$baseUrl/post/create'),
+    final response = await http.post(
+      Uri.parse('$baseUrl/post/create'),
       headers: {
         'app-id': '626fc92ee000f64b3bf05f11',
         'Content-Type': 'application/json'
@@ -72,12 +73,18 @@ class ApiPost {
         '${response.body} ');
   }
 
-  static Future<Post> modifyPost(Post post) async {
-    if (post.id == null) {
-      throw Exception('Impossibile modificare il post');
-    }
+  static Future<Post> modifyPost(Post post, String userId) async {
+
     Map<String, dynamic> _jsonPost = post.toJson();
     _jsonPost.removeWhere((key, value) => value == null);
+
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    final _idUser = sp.getString('loggedUserId');
+    if (_idUser == null) {
+      throw Exception('Utente non loggato');
+    } else {
+      _jsonPost['owner'] = _idUser;
+    }
 
     final response = await http.put(
       Uri.parse('$baseUrl/post/${post.id}'),
@@ -85,7 +92,7 @@ class ApiPost {
         'app-id': '626fc92ee000f64b3bf05f11',
         'Content-Type': 'application/json'
       },
-      body: jsonEncode({_jsonPost}),
+      body: jsonEncode(_jsonPost),
     );
     if (response.statusCode == 200) {
       return Post.fromJson(jsonDecode(response.body));
