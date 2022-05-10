@@ -18,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   late User user;
   late Future<User> _futureUser;
-  late UniqueKey _key;
+
 
   late List<Post> _listaPostVisualizzate;
   late bool _hasMorePost;

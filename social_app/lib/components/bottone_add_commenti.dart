@@ -89,7 +89,7 @@ class _BottoneAddCommentiState extends State<BottoneAddCommenti> {
                             if (_message == null || _message!.isEmpty) {
                               Navigator.of(context).pop(); //oppure Alert Dialog
                             }
-                            final response = await ApiComment.addCommentTo(_idPost!, _message!);
+                            await ApiComment.addCommentTo(_idPost!, _message!);
                             _textEditingController.clear();
                             Navigator.of(context).pop(true);
                           }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:social_app/api/api_comment.dart';
 import 'package:social_app/components/comment_widget.dart';
-import 'package:social_app/components/post_card.dart';
 import 'package:social_app/models/comment.dart';
 import 'package:social_app/models/comment_response.dart';
-import 'package:social_app/models/user.dart';
+
 
 class CommentiPost extends StatefulWidget {
   final String id;
@@ -49,46 +48,44 @@ class _CommentiPostState extends State<CommentiPost> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder(
-        future: _future,
-        builder: (context, AsyncSnapshot<List<Comment>> snapshot) {
-          if (snapshot.hasData) {
-            List<Comment> comments = snapshot.data ?? [];
-            if (comments.isEmpty) {
-              return const Padding(
-                padding:  EdgeInsets.all(8.0),
-                child: Align(
-                    alignment: Alignment.center
-                    ,child: Text('Non ci sono Commenti', style: TextStyle(fontSize: 16),)),
-              );
-            }
-            else {
-                return ListView.builder(
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    itemCount: comments.length,
-                    itemBuilder: (context, index) {
-                      if (index == _listaComment.length) {
-                        _future = _fetchComment();
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      return CommentWidget(_listaComment[index]);
-                    });
-              }
-            }
-            if (snapshot.hasError) {
-              return Center(
-                  child: Text(
-                    "Errore nel caricamento: ${snapshot.error}",
-                    style: const TextStyle(fontSize: 24),
-                  ));
-            }
-            return const Center(child: CircularProgressIndicator());
+    return FutureBuilder(
+      future: _future,
+      builder: (context, AsyncSnapshot<List<Comment>> snapshot) {
+        if (snapshot.hasData) {
+          List<Comment> comments = snapshot.data ?? [];
+          if (comments.isEmpty) {
+            return const Padding(
+              padding:  EdgeInsets.all(8.0),
+              child: Align(
+                  alignment: Alignment.center
+                  ,child: Text('Non ci sono Commenti', style: TextStyle(fontSize: 16),)),
+            );
           }
-        ),
-    );
+          else {
+              return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: comments.length,
+                  itemBuilder: (context, index) {
+                    if (index == _listaComment.length) {
+                      _future = _fetchComment();
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return CommentWidget(_listaComment[index]);
+                  });
+            }
+          }
+          if (snapshot.hasError) {
+            return Center(
+                child: Text(
+                  "Errore nel caricamento: ${snapshot.error}",
+                  style: const TextStyle(fontSize: 24),
+                ));
+          }
+          return const Center(child: CircularProgressIndicator());
+        }
+      );
   }
 }

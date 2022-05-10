@@ -55,7 +55,7 @@ class _BottoneAggiungiModificaPostState extends State<BottoneAggiungiModificaPos
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Container(
+            child: SizedBox(
               height: 200,
               child: Image.network(
                   'https://www.legadelcane.org/wp-content/uploads/puppy-1903313_1920-1080x675.jpg'
