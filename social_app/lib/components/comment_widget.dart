@@ -75,8 +75,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                       onPressed: () async {
                         late bool result;
                         if (widget.comment.id != null) {
-                          result =
-                          await ApiComment.deleteCommentId(
+                          result = await ApiComment.deleteCommentId(
                               widget.comment.id!);
                         }
                         if (result == true) {

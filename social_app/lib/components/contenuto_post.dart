@@ -72,10 +72,7 @@ class _ContenutoPostState extends State<ContenutoPost> {
                         child: CircularProgressIndicator(),
                       );
                     }
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: PostCard(_listPost[index], callback: initVariables,),
-                    );
+                    return PostCard(_listPost[index], callback: initVariables,);
                   });
             }
             if (snapshot.hasError) {
