@@ -16,17 +16,15 @@ class CommentiPost extends StatefulWidget {
 class _CommentiPostState extends State<CommentiPost> {
 
   late List<Comment> _listaComment;
-  late bool _hasMoreComment;
+
   late int _skipComment;
-  late int _page;
+
   late Future<List<Comment>> _future;
 
   @override
   void initState() {
     _listaComment = [];
-    _hasMoreComment = false;
     _skipComment = 0;
-    _page = 0;
     _future = _fetchComment();
     super.initState();
   }
@@ -37,8 +35,6 @@ class _CommentiPostState extends State<CommentiPost> {
     final CommentResponse result = await ApiComment.getCommentsFromPost(widget.id);
     setState(() {
       _skipComment = _skipComment + result.limit;
-      _hasMoreComment = (result.total - _skipComment) > 0;
-      _page++;
       _listaComment = _listaComment + result.data;
     });
     return _listaComment;
