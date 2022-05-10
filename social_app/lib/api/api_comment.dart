@@ -106,8 +106,8 @@ class ApiComment {
         '${response.body} ');
   }
 
-  static Future<bool> deleteComment(String id) async {
-    final response = await http.delete(Uri.parse('$baseUrl/comment/$id'),
+  static Future<bool> deleteCommentId(String commentId) async {
+    final response = await http.delete(Uri.parse('$baseUrl/comment/$commentId'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11'});
 
 

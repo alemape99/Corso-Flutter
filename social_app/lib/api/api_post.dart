@@ -101,8 +101,8 @@ class ApiPost {
         '${response.body} ');
   }
 
-  static Future<bool> deletePost(String id) async {
-    final response = await http.delete(Uri.parse('$baseUrl/post/$id'),
+  static Future<bool> deletePost(String postId) async {
+    final response = await http.delete(Uri.parse('$baseUrl/post/$postId'),
         headers: {'app-id': '626fc92ee000f64b3bf05f11'});
 
     if (response.statusCode == 200) {
