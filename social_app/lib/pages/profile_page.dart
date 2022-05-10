@@ -18,6 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   late User user;
   late Future<User> _futureUser;
+  late UniqueKey _key;
 
   late List<Post> _listaPostVisualizzate;
   late bool _hasMorePost;
@@ -40,6 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
     });
     return _listaPostVisualizzate;
   }
+
 
   void initVariables() {
     _listaPostVisualizzate = [];
@@ -70,7 +72,11 @@ class _ProfilePageState extends State<ProfilePage> {
             future: _futureUser,
             builder: (context, snapshot) {
               if (snapshot.hasData && snapshot.data is User) {
-                return IntestazioneProfilo(user,);
+                return IntestazioneProfilo(user, () async {
+                  user = await ApiUser.getDeatilsFor(widget.id);
+                  setState(() {
+                  });
+                });
               }
               if (snapshot.hasError) {
                 return Center(

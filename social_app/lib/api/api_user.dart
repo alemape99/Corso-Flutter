@@ -67,9 +67,9 @@ class ApiUser {
         'Content-Type': 'application/json'
       },
       body:
-      jsonEncode({
+      jsonEncode(
         _jsonUser
-      }),
+      ),
     );
     if(response.statusCode == 200){
       return User.fromJson(jsonDecode(response.body));

@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:social_app/components/info_intestazione.dart';
+import 'package:social_app/components/modifica_utente.dart';
 import 'package:social_app/models/user.dart';
 
-class IntestazioneProfilo extends StatelessWidget {
+class IntestazioneProfilo extends StatefulWidget {
   final User user;
-  const IntestazioneProfilo(this.user, {Key? key}) : super(key: key);
+  final VoidCallback callback;
+  const IntestazioneProfilo(this.user, this.callback, {Key? key})
+      : super(key: key);
 
+  @override
+  State<IntestazioneProfilo> createState() => _IntestazioneProfiloState();
+}
+
+class _IntestazioneProfiloState extends State<IntestazioneProfilo> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,7 +27,7 @@ class IntestazioneProfilo extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.network(
-                user.picture ?? 'https://via.placeholder.com/150',
+                widget.user.picture ?? 'https://via.placeholder.com/150',
                 scale: 0.35,
               ),
             ),
@@ -30,18 +38,13 @@ class IntestazioneProfilo extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
-              '${user.firstName} ${user.lastName}',
-              style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-              ),
+              '${widget.user.firstName} ${widget.user.lastName}',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
         ),
         const Padding(
-          padding:  EdgeInsets.symmetric(
-              horizontal: 8.0
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: Divider(
             thickness: 3,
             color: Colors.purple,
@@ -52,11 +55,11 @@ class IntestazioneProfilo extends StatelessWidget {
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               border: Border.all(color: Colors.purple),
-              borderRadius: BorderRadius.circular(16)
-          ),
+              borderRadius: BorderRadius.circular(16)),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (user.dateOfBirth != null)
+              if (widget.user.dateOfBirth != null)
                 Row(
                   children: [
                     const Icon(
@@ -67,33 +70,34 @@ class IntestazioneProfilo extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                        DateFormat('d/M/y').format(
-                            DateTime.parse(user.dateOfBirth!),
-                        ),
+                      DateFormat('d/M/y').format(
+                        DateTime.parse(widget.user.dateOfBirth!),
+                      ),
                     ),
                   ],
                 ),
-              if (user.location != null && user.location!.city != null)
+              if (widget.user.location != null &&
+                  widget.user.location!.city != null)
                 InfoIntestazione(
-                    icon: Icons.place,
-                    testo: user.location!.city!,
+                  icon: Icons.place,
+                  testo: widget.user.location!.city!,
                 ),
               const SizedBox(
                 height: 5,
               ),
-              if (user.email != null)
+              if (widget.user.email != null)
                 InfoIntestazione(
-                    icon: Icons.email,
-                    testo: user.email!,
+                  icon: Icons.email,
+                  testo: widget.user.email!,
                 ),
               const SizedBox(
                 height: 5,
               ),
-              if (user.gender != null)
+              if (widget.user.gender != null)
                 Row(
                   children: [
                     Icon(
-                      user.gender == 'male'
+                      widget.user.gender == 'male'
                           ? (Icons.male)
                           : (Icons.female),
                       color: Colors.purple,
@@ -101,34 +105,43 @@ class IntestazioneProfilo extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    Text(
-                        user.gender!
-                    ),
+                    Text(widget.user.gender!),
                   ],
                 ),
               const SizedBox(
                 height: 5,
               ),
-              if (user.phone != null)
-                InfoIntestazione(
-                    icon: Icons.phone,
-                    testo:  user.phone!,
-                ),
-              const SizedBox(
-                height: 5,
-              ),
+              if (widget.user.phone != null)
+                TextButton.icon(
+                    icon: const Icon(
+                      Icons.smartphone,
+                      color: Colors.purple,
+                    ),
+                    label: Text(
+                      widget.user.phone!,
+                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
+                    ),
+                    onPressed: () async {
+                      var edited = await showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (context) => ModificaUtente(
+                                user: widget.user,
+                              ));
+                      if (edited == true) {
+                        widget.callback();
+                      }
+                    }),
             ],
           ),
         ),
         const Padding(
-          padding: EdgeInsets.only(
-              left: 8, top: 8
-          ),
+          padding: EdgeInsets.only(left: 8, top: 8),
           child: Text(
             'Posts',
             style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

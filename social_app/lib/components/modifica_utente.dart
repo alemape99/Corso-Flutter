@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:social_app/api/api_user.dart';
 import 'package:social_app/models/user.dart';
 
 class ModificaUtente extends StatefulWidget {
-  final User? user;
-  const ModificaUtente({this.user, Key? key}) : super(key: key);
+  final User user;
+  const ModificaUtente({required this.user, Key? key}) : super(key: key);
 
   @override
   State<ModificaUtente> createState() => _ModificaUtenteState();
@@ -14,8 +15,7 @@ class _ModificaUtenteState extends State<ModificaUtente> {
 
   @override
   void initState() {
-    if(widget.user!.phone != null)
-    _phoneController = TextEditingController(text: widget.user!.phone);
+    _phoneController = TextEditingController(text: widget.user.phone);
     super.initState();
   }
 
@@ -29,7 +29,30 @@ class _ModificaUtenteState extends State<ModificaUtente> {
       child: ListView(
         shrinkWrap: true,
         children: [
-          TextField(controller: _phoneController,)
+          TextField(
+            controller: _phoneController,
+          ),
+          Row(
+            children: [
+              TextButton(
+                  child: const Text('Annulla'),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                  },
+              ),
+              TextButton(
+                  child: const Text('Modifica'),
+                  onPressed: () async {
+                    var _modUser = User(
+                      id: widget.user.id,
+                      phone: _phoneController.text
+                    );
+                    await ApiUser.modifiyUser(_modUser);
+                    Navigator.of(context).pop(true);
+                  },
+              ),
+            ],
+          )
         ],
       ),
     );
