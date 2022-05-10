@@ -172,7 +172,7 @@ class _PostCardState extends State<PostCard> {
                       ),
                     ),
                   TextButton(
-                    onPressed: () => print('Share'),
+                    onPressed: () {},
                     child: Row(
                       children: const [
                         Icon(

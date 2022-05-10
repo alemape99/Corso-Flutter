@@ -11,7 +11,7 @@ class BarraInferiore extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-                onPressed: () => print('test'),
+                onPressed: () {},
                 icon: const Icon(Icons.home, color: Colors.purple,)
             ),
            const BottoneProfilo(),
